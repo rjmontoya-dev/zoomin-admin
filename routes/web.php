@@ -1,0 +1,53 @@
+<?php
+
+use App\Http\Controllers\Admin\Article\ArticleController;
+use App\Http\Controllers\CmsPage\PagesController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
+
+Route::get('/', function () {
+    return Inertia::render('auth/Login');
+})->name('home');
+
+Route::get('dashboard', function () {
+    return Inertia::render('Dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+
+Route::prefix('admin')
+    ->name('admin.')
+    ->middleware(['auth'])
+    ->group(function (){
+
+        Route::prefix('cms')
+            ->name('cms.')
+            ->controller(PagesController::class)
+            ->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::get('/{page}/edit', 'edit')->name('edit');
+                Route::post('/{page}', 'update')->name('update');
+            });
+
+        Route::prefix('articles')
+            ->name('articles.')
+            ->controller(ArticleController::class)
+            ->group(function() {
+
+                Route::get('/', 'index')->name('index');
+                Route::get('/create','create')->name('create');
+                Route::post('/store','store')->name('store');
+                Route::get('/{article}/edit', 'edit')->name('edit');
+                Route::post('/{article}/update', 'update')->name('update');
+                Route::delete('/{article}/archive', 'archive')->name('archive');
+                Route::post('/{article}/restore', 'restore')->name('restore');
+            });
+
+
+
+    });
+
+require __DIR__.'/settings.php';
+require __DIR__.'/auth.php';
+
+
