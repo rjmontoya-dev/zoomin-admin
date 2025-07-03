@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Article\ArticleController;
+use App\Http\Controllers\Admin\User\UserController;
 use App\Http\Controllers\CmsPage\PagesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -41,6 +42,20 @@ Route::prefix('admin')
                 Route::post('/{article}/update', 'update')->name('update');
                 Route::delete('/{article}/archive', 'archive')->name('archive');
                 Route::post('/{article}/restore', 'restore')->name('restore');
+            });
+
+        Route::prefix('users')
+            ->name('users.')
+            ->controller(UserController::class)
+            ->group(function() {
+
+                Route::get('/', 'index')->name('index');
+                Route::get('/create','create')->name('create');
+                Route::post('/store','store')->name('store');
+                Route::get('/{user}/edit', 'edit')->name('edit');
+                Route::post('/{user}/update', 'update')->name('update');
+                Route::delete('/{user}/archive', 'archive')->name('archive');
+                Route::post('/{user}/restore', 'restore')->name('restore');
             });
 
 
