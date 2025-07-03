@@ -54,9 +54,9 @@ const footerNavItems: NavItem[] = [
     },
     {
         title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#vue',
+        href: '/docs/',
         icon: BookOpen,
-    },
+    }
 ];
 </script>
 
