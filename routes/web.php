@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Article\ArticleController;
+use App\Http\Controllers\Admin\RolePermission\RolePermissionController;
 use App\Http\Controllers\Admin\User\UserController;
 use App\Http\Controllers\CmsPage\PagesController;
 use Illuminate\Http\Request;
@@ -42,7 +43,7 @@ Route::prefix('admin')
                 Route::post('/{article}/update', 'update')->name('update');
                 Route::delete('/{article}/archive', 'archive')->name('archive');
                 Route::post('/{article}/restore', 'restore')->name('restore');
-            });
+           });
 
         Route::prefix('users')
             ->name('users.')
@@ -58,8 +59,14 @@ Route::prefix('admin')
                 Route::post('/{user}/restore', 'restore')->name('restore');
             });
 
-
-
+         Route::prefix('roles-permissions')
+            ->name('roles-permissions.')
+            ->controller(RolePermissionController::class)
+            ->group(function() {
+                Route::get('/', 'index')->name('index');
+                Route::get('/get-roles', 'getRoles')->name('get-roles');
+                Route::get('/{role}', 'show')->name('show');
+        });
     });
 
 require __DIR__.'/settings.php';

@@ -24,14 +24,14 @@ const mainNavItems: NavItem[] = [
         href: '/admin/articles',
         icon: LayoutGrid,
     },
-    {
-        title: 'Notification',
-        href: '/admin/articles',
-        icon: LayoutGrid,
-    },
+    // {
+    //     title: 'Notification',
+    //     href: '/admin/articles',
+    //     icon: LayoutGrid,
+    // },
     {
         title: 'Roles & Permissions',
-        href: '/admin/articles',
+        href: '/admin/roles-permissions',
         icon: LayoutGrid,
     },
     {
@@ -49,7 +49,7 @@ const mainNavItems: NavItem[] = [
 const footerNavItems: NavItem[] = [
     {
         title: 'Github Repo',
-        href: 'https://github.com/laravel/vue-starter-kit',
+        href: 'https://github.com/rjmontoya-dev/template-v0.1',
         icon: Folder,
     },
     {

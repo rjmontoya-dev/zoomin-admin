@@ -170,7 +170,7 @@ const restore = (id: number) => {
                                 <button @click="router.get(route('admin.users.edit', item.id))" class="auto-focus p-2 text-gray-600 hover:text-gray-800" title="Edit">
                                     <Edit class="h-4 w-4" />
                                 </button>
-                                <button v-if="usePage()?.props?.auth?.users?.id == item.id" @click="archive(item.id)" class="p-2 text-red-600 hover:text-red-800" title="Delete">
+                                <button v-if="usePage()?.props?.auth?.user?.id != item.id" @click="archive(item.id)" class="p-2 text-red-600 hover:text-red-800" title="Delete">
                                     <Trash2 class="h-4 w-4" />
                                 </button>
                             </template>

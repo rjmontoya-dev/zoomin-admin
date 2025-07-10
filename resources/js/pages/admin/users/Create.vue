@@ -23,6 +23,10 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+  roles: {
+    type: Object,
+    required: true,
+  },
 })
 console.log(props.item);
 const isShow = defineModel('isEditShow');
@@ -31,6 +35,7 @@ const form = useForm({
     name: null,
     email: null,
     password: null,
+    role_id: null,
 })
 
 const breadcrumbs = [
@@ -79,7 +84,7 @@ const submit = () => {
             <div class="flex-1 overflow-y-auto p-6">
                 <div class="flex justify-center">
                     <div class="w-full max-w-2xl rounded border bg-white p-6 shadow">
-                        <FormSection :form="form" :buttonTitle="buttonTitle" :isCreating="true" />
+                        <FormSection :form="form" :buttonTitle="buttonTitle" :isCreating="true" :roles="roles" />
 
                         <!-- Sticky button container -->
                         <div class="sticky bottom-0 mt-6 flex justify-end space-x-3 border-t bg-white p-4">

@@ -1,12 +1,26 @@
 <script setup lang="ts">
 import { defineProps, defineEmits } from 'vue';
 import Input from '@/components/ui/input/Input.vue';
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectLabel,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select'
+
 
 defineProps({
     buttonTitle: String,
     form: {
         type: Object,
         required: true
+    },
+    roles: {
+        type: Array,
+        required: false
     },
     isCreating: {
         type: Boolean,
@@ -57,6 +71,30 @@ const emit = defineEmits(['submit','cancel']);
                     placeholder="Enter user password"
                 />
             </div>
+
+             <!-- Roles -->
+            <div class="space-y-2 pb-4 w-full">
+                <label class="block text-sm font-medium text-gray-900 dark:text-white">Role</label>
+                <Select v-model="form.role_id" class="w-full">
+                    <SelectTrigger class="w-full">
+                        <SelectValue placeholder="Select a role" />
+                    </SelectTrigger>
+                    <SelectContent class="w-full">
+                        <SelectGroup>
+                            <SelectLabel>Roles</SelectLabel>
+                            <SelectItem
+                                v-for="role in roles"
+                                :key="role.id"
+                                :value="role.id"
+                                class="w-full"
+                            >
+                                {{ role.name }}
+                            </SelectItem>
+                        </SelectGroup>
+                    </SelectContent>
+                </Select>
+            </div>
+
         </form>
     </div>
 </template>
