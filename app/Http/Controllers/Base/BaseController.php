@@ -86,9 +86,9 @@ abstract class BaseController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function baseCreate(Request $request): Response
+    public function baseCreate(Request $request, $props=[]): Response
     {
-        return Inertia::render($this->getViewPath() . '/Create',  $this->getCreateProps());
+        return Inertia::render($this->getViewPath() . '/Create',  array_merge($props,$this->getCreateProps()));
     }
 
     /**

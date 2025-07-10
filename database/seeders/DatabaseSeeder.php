@@ -16,11 +16,18 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Rj Dev',
-            'email' => 'rjmontoya-dev@mail.com',
-            'email_verified_at' => now(),
-            'password'=> Hash::make('password'),
+        User::updateOrCreate(
+            ['email' => 'rjmontoya-dev@mail.com'],
+            [
+                'name' => 'Rj Dev',
+                'email_verified_at' => now(),
+                'password' => Hash::make('password'),
+            ]
+        );
+
+        $this->call([
+            Admin\RoleSeeder::class,
+            Admin\PermissionSeeder::class,
         ]);
     }
 }

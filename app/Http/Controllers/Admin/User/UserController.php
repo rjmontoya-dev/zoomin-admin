@@ -9,6 +9,7 @@ use App\Http\Resources\Admin\User\EditResource;
 use App\Http\Service\User\UserService;
 use App\Models\User;
 use App\Http\Requests\Admin\User\UserUpdateRequest;
+use App\Models\Admin\Role\Role;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
@@ -63,7 +64,7 @@ class UserController extends BaseController
      */
     public function create(Request $request): Response
     {
-        return parent::baseCreate($request);
+        return parent::baseCreate($request, ['roles' => Role::all()]);
     }
 
     /**
@@ -79,7 +80,7 @@ class UserController extends BaseController
      */
     public function edit(Request $request, User $user): Response
     {
-        return parent::baseEdit($request, $user);
+        return parent::baseEdit($request, $user, ['roles' => Role::all()]);
     }
 
     /**
