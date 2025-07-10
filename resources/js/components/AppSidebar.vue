@@ -36,7 +36,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Users',
-        href: '/admin/articles',
+        href: '/admin/users',
         icon: LayoutGrid,
     },
     {
