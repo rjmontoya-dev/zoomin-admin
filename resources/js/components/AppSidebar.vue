@@ -40,8 +40,8 @@ const mainNavItems: NavItem[] = [
         icon: LayoutGrid,
     },
     {
-        title: 'Activity Logs',
-        href: '/admin/articles',
+        title: 'Activity Log',
+        href: '/admin/activity-log',
         icon: LayoutGrid,
     },
 ];

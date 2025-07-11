@@ -2,13 +2,13 @@
 
 namespace App\Models\Admin\Pages;
 
+use App\Models\System\BaseModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
-class CmsPage extends Model
+class CmsPage extends BaseModel
 {
-     use HasFactory ;
 
     /**
      * The attributes that aren't mass assignable.

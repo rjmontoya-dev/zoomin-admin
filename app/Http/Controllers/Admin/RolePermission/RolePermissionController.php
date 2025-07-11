@@ -2,41 +2,57 @@
 
 namespace App\Http\Controllers\Admin\RolePermission;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Base\BaseController;
+use App\Http\Resources\Admin\RolePermission\EditResource;
+use App\Http\Resources\Admin\RolePermission\IndexCollection;
 use App\Http\Service\RolePermission\RolePermissionService;
-use Inertia\Inertia;
-use Spatie\Permission\Models\Role;
+use App\Models\Admin\Role\Role;
+use Illuminate\Http\Request;
 
-class RolePermissionController extends Controller
+class RolePermissionController extends BaseController
 {
-    public function __construct(
-        private readonly RolePermissionService $rolePermissionService
-    )
+    protected function setModel(): string
     {
+        return Role::class;
     }
 
-    public function index()
+    protected function setService(): string
     {
-        $roles = $this->rolePermissionService->getRolesWithPermissions();
-
-        return Inertia::render('admin/roles-permissions/index', [
-            'roles' => $roles,
-        ]);
+        return RolePermissionService::class;
     }
 
-    public function show(Role $role)
+    protected function setIndexResource(): string
     {
-        $data = $this->rolePermissionService->getRoleDetails($role);
-
-        return Inertia::render('admin/roles-permissions/show', [
-            'role' => $data['role'],
-            'permissions' => $data['permissions'],
-            'users' => $data['role']->users,
-        ]);
+        return IndexCollection::class;
     }
 
-    public function getRoles()
+    protected function setEditResource(): ?string
     {
-        return $this->rolePermissionService->getRolesWithPermissions();
+        return EditResource::class;
+    }
+
+    protected function getViewPath(): string
+    {
+        return 'admin/roles-permissions';
+    }
+
+    protected function getWith(): array
+    {
+        return ['permissions', 'users'];
+    }
+
+    protected function getRoutePrefix(): string
+    {
+        return 'admin.roles-permissions';
+    }
+
+    public function index(Request $request)
+    {
+        return parent::baseIndex($request);
+    }
+
+    public function edit(Request $request, Role $role)
+    {
+        return parent::baseEdit($request, $role);
     }
 }

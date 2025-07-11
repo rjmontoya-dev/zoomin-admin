@@ -1,7 +1,8 @@
 <?php
 
-namespace Database\Seeders\Admin;
+namespace Database\Seeders\Admin\RolePermission;
 
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -15,9 +16,7 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        // Reset cached roles and permissions
-        app()[PermissionRegistrar::class]->forgetCachedPermissions();
-
+        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Role::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
@@ -27,8 +26,9 @@ class RoleSeeder extends Seeder
         foreach ($roles as $role) {
             Role::create([
                 'name' => $role,
-                'guard_name' => 'admin',
+                'guard_name' => 'web',
             ]);
         }
+        User::first()->assignRole(Role::first());
     }
 }

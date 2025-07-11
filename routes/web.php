@@ -1,10 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\ActivityLog\ActivityLogController;
 use App\Http\Controllers\Admin\Article\ArticleController;
 use App\Http\Controllers\Admin\RolePermission\RolePermissionController;
 use App\Http\Controllers\Admin\User\UserController;
 use App\Http\Controllers\CmsPage\PagesController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -20,7 +20,7 @@ Route::get('dashboard', function () {
 Route::prefix('admin')
     ->name('admin.')
     ->middleware(['auth'])
-    ->group(function (){
+    ->group(function () {
 
         Route::prefix('cms')
             ->name('cms.')
@@ -34,42 +34,46 @@ Route::prefix('admin')
         Route::prefix('articles')
             ->name('articles.')
             ->controller(ArticleController::class)
-            ->group(function() {
+            ->group(function () {
 
                 Route::get('/', 'index')->name('index');
-                Route::get('/create','create')->name('create');
-                Route::post('/store','store')->name('store');
+                Route::get('/create', 'create')->name('create');
+                Route::post('/store', 'store')->name('store');
                 Route::get('/{article}/edit', 'edit')->name('edit');
                 Route::post('/{article}/update', 'update')->name('update');
                 Route::delete('/{article}/archive', 'archive')->name('archive');
                 Route::post('/{article}/restore', 'restore')->name('restore');
-           });
+            });
 
         Route::prefix('users')
             ->name('users.')
             ->controller(UserController::class)
-            ->group(function() {
+            ->group(function () {
 
                 Route::get('/', 'index')->name('index');
-                Route::get('/create','create')->name('create');
-                Route::post('/store','store')->name('store');
+                Route::get('/create', 'create')->name('create');
+                Route::post('/store', 'store')->name('store');
                 Route::get('/{user}/edit', 'edit')->name('edit');
                 Route::post('/{user}/update', 'update')->name('update');
                 Route::delete('/{user}/archive', 'archive')->name('archive');
                 Route::post('/{user}/restore', 'restore')->name('restore');
             });
 
-         Route::prefix('roles-permissions')
+        Route::prefix('roles-permissions')
             ->name('roles-permissions.')
             ->controller(RolePermissionController::class)
-            ->group(function() {
+            ->group(function () {
                 Route::get('/', 'index')->name('index');
-                Route::get('/get-roles', 'getRoles')->name('get-roles');
-                Route::get('/{role}', 'show')->name('show');
-        });
+                Route::get('/{role}/edit', 'edit')->name('edit');
+            });
+
+        Route::prefix('activity-log')
+            ->name('activity-log.')
+            ->controller(ActivityLogController::class)
+            ->group(function () {
+                Route::get('/', 'index')->name('index');
+            });
     });
 
-require __DIR__.'/settings.php';
-require __DIR__.'/auth.php';
-
-
+require __DIR__ . '/settings.php';
+require __DIR__ . '/auth.php';

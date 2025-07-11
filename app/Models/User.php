@@ -16,7 +16,7 @@ class User extends Authenticatable
     /**
      * @var string
      */
-    protected $guard_name = 'admin';
+    protected $guard_name = 'web';
 
     /**
      * The attributes that are mass assignable.
@@ -52,3 +52,4 @@ class User extends Authenticatable
         ];
     }
 }
+
