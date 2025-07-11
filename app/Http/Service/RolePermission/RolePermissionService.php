@@ -2,21 +2,22 @@
 
 namespace App\Http\Service\RolePermission;
 
+use App\Http\Service\Base\BaseService;
 use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
 
-class RolePermissionService
+class RolePermissionService extends BaseService
 {
-    public function getRolesWithPermissions()
+    protected function initialize(): void
     {
-        return Role::all();
+        parent::initialize();
+        $this->setSearchableFields(['name']);
+        $this->setSorters(['name', 'created_at']);
     }
 
-    public function getRoleDetails(Role $role)
+    protected function getFormData(?object $item = null): array
     {
         return [
-            'role' => $role->load('permissions', 'users'),
-            'permissions' => Permission::all(),
+            'permissions' => Permission::all()->pluck('name'),
         ];
     }
 }
