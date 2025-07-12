@@ -16,7 +16,10 @@ export default defineConfig({
       {
         text: 'Documentation',
         items: [
-          { text: 'CMS Documentation', link: '/CMS_DOCUMENTATION' }
+          { text: 'CMS Documentation', link: '/CMS_DOCUMENTATION' },
+          { text: 'Users', link: '/users' },
+          { text: 'Roles and Permissions', link: '/roles-and-permissions' },
+          { text: 'Activity Logs', link: '/activity-logs' },
         ]
       },
       {
