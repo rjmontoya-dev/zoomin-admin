@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\Article\ArticleController;
 use App\Http\Controllers\Admin\RolePermission\RolePermissionController;
 use App\Http\Controllers\Admin\User\UserController;
 use App\Http\Controllers\CmsPage\PagesController;
+use App\Http\Controllers\Settings\TwoFactorAuthController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -77,3 +78,4 @@ Route::prefix('admin')
 
 require __DIR__ . '/settings.php';
 require __DIR__ . '/auth.php';
+require __DIR__ . '/two-factor.php';
