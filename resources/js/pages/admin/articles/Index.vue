@@ -149,7 +149,7 @@ const restore = (id: number) => {
             <div class=" h-full w-full  p-8 overflow-y-auto">
                 <BaseTable
                     :route="indexRoute"
-                    :data="data.data"
+                    :data="data"
                     :columns="COLUMNS"
                     :tabs="TABS"
                     :active-tab="activeTab"

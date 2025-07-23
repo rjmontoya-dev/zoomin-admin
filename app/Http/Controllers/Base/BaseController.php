@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Base;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Admin\Article\IndexCollection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Http\FormRequest;
 use Inertia\Inertia;
@@ -28,7 +29,7 @@ abstract class BaseController extends Controller
     /**
      * Define the service class to be used by the controller.
      */
-    abstract protected function setIndexResource(): string;
+    abstract protected function setIndexResource(): ?string;
 
     /**
      * Define the resource class for the edit view.
@@ -117,10 +118,11 @@ abstract class BaseController extends Controller
     public function baseEdit(Request $request, Model $model, $props = []): Response
     {
         $data = $this->service->edit($model);
+        $viewProps['item'] = $data['item'];
 
         return Inertia::render(
             $this->getViewPath() . '/Edit',
-            array_merge($props, $this->getEditProps($data['item']), ['item' => $data['item']])
+            $viewProps
         );
     }
 
@@ -133,7 +135,7 @@ abstract class BaseController extends Controller
             $resource = $this->service->update($request, $id);
 
             return redirect()
-                ->route($this->getRoutePrefix() . '.index')
+                ->back()
                 ->with('success', $this->getUpdateSuccessMessage());
 
         } catch (\Illuminate\Validation\ValidationException $e) {
@@ -199,7 +201,7 @@ abstract class BaseController extends Controller
     /**
      * Get additional props for edit view. Override in child controllers.
      */
-    protected function getEditProps($item): array
+    protected function getEditProps(): array
     {
         return [];
     }

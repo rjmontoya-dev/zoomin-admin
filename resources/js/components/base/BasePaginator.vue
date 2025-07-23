@@ -12,7 +12,7 @@ const props = defineProps<{
   };
   perPageOptions?: number[];
 }>();
-console.log(props.meta)
+
 const emit = defineEmits(['update:page', 'update:perPage']);
 
 const internalPerPage = ref(props.meta.per_page);

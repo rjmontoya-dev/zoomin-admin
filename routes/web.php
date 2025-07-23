@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\ActivityLog\ActivityLogController;
 use App\Http\Controllers\Admin\Article\ArticleController;
+use App\Http\Controllers\Admin\Maintenance\MaintenanceController;
 use App\Http\Controllers\Admin\RolePermission\RolePermissionController;
 use App\Http\Controllers\Admin\User\UserController;
 use App\Http\Controllers\CmsPage\PagesController;
@@ -44,6 +45,14 @@ Route::prefix('admin')
                 Route::post('/{article}/update', 'update')->name('update');
                 Route::delete('/{article}/archive', 'archive')->name('archive');
                 Route::post('/{article}/restore', 'restore')->name('restore');
+            });
+
+        Route::prefix('maintenance')
+            ->name('maintenance.')
+            ->controller(MaintenanceController::class)
+            ->group(function () {
+                Route::get('/', 'edit')->name('edit');
+                Route::post('/update', 'update')->name('update');
             });
 
         Route::prefix('users')

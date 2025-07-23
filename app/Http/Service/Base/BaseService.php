@@ -3,18 +3,17 @@
 namespace App\Http\Service\Base;
 
 use App\Http\Resources\Admin\Article\IndexCollection;
+use App\Models\Admin\Article;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Validation\ValidationException;
 
 class BaseService
 {
     protected Model $model;
-    protected string $IndexResourceClass;
+    protected ?string $IndexResourceClass;
     protected ?string $EditResourceClass;
     protected array $with;
     protected array $withCount;
@@ -28,7 +27,7 @@ class BaseService
     protected string $defaultSortDirection = 'desc';
     protected string $dateRangeField = 'created_at';
 
-    public function __construct(string $modelClass, array $with = [], array $withCount = [], string $indexResourceClass, ?string $editResourceClass = null)
+    public function __construct(string $modelClass, array $with = [], array $withCount = [], ?string $indexResourceClass, ?string $editResourceClass = null)
     {
         $this->model = new $modelClass;
         $this->with = $with;
@@ -72,10 +71,9 @@ class BaseService
         $perPage = $this->getPerPageLimit($request);
         $paginated = $query->paginate($perPage);
 
-
         return [
             'data' => $this->IndexResourceClass
-                ? $this->IndexResourceClass::collection(collect($paginated->items()))
+                ?  $this->IndexResourceClass::collection($paginated->items())->resolve()
                 : $paginated->items(),
             'meta' => [
                 'current_page' => $paginated->currentPage(),
@@ -133,7 +131,7 @@ class BaseService
     {
         if ($this->EditResourceClass) {
             return [
-                'item' => new $this->EditResourceClass($model),
+                'item' => $this->EditResourceClass::make($model)->resolve(),
                 'formData' => $this->getFormData($model)
             ];
         }

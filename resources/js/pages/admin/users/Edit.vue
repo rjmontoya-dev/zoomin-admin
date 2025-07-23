@@ -58,7 +58,7 @@ const cancel = () => {
 
 // Watch for changes in props.data and populate the form
 watch(
-  () => props.item.data,
+  () => props.item,
   (newData:any) => {
     if (newData) {
         form.id = newData.id ?? ''

@@ -53,15 +53,14 @@ interface Role {
 const props = defineProps<{
   item: Object;
 }>()
-console.log(props.item.data.id)
 const breadcrumbs = [
     {
         title: 'Roles & Permissions',
         href: route('admin.roles-permissions.index'),
     },
     {
-        title: props.item.data?.name,
-        href: route('admin.roles-permissions.edit', props.item.data?.id),
+        title: props.item?.name,
+        href: route('admin.roles-permissions.edit', props.item?.id),
     },
 ];
 
@@ -76,10 +75,10 @@ const tabs = [
 
 <template>
     <AppLayout>
-        <AppMainContent :breadcrumbs="breadcrumbs" :title="`Role: ${item.data?.name}`">
+        <AppMainContent :breadcrumbs="breadcrumbs" :title="`Role: ${item?.name}`">
             <BaseNavTabs :tabs="tabs" v-model="activeTab" />
             <div v-if="activeTab === 'permissions'" class="mt-4 p-4 space-y-4 flex-1 overflow-y-auto p-6">
-                <Card v-for="module in item.data?.permissions" :key="module.id">
+                <Card v-for="module in item?.permissions" :key="module.id">
                     <CardContent class="p-6">
                         <h3 class="text-lg font-semibold">{{ module.name }}</h3>
                         <div v-for="category in module.categories" :key="category.id" class="mt-4">
@@ -119,8 +118,8 @@ const tabs = [
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
-                                <template v-if="item.data?.members && item.data.members.length > 0">
-                                    <TableRow v-for="user in item.data.members" :key="user.id">
+                                <template v-if="item?.members && item?.members.length > 0">
+                                    <TableRow v-for="user in item?.members" :key="user.id">
                                     <TableCell>{{ user.name }}</TableCell>
                                     <TableCell>{{ user.email }}</TableCell>
                                     <TableCell>

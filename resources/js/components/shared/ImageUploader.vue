@@ -168,7 +168,7 @@ const isBase64Image = computed(() => {
                 <Button type="button" variant="destructive" size="icon" class="absolute right-2 top-2 h-6 w-6 z-[5]" @click="clearFile">
                     <X class="h-3 w-3" />
                 </Button>
-                <div v-if="isBase64Image" class="mt-1 text-xs text-amber-500">This image will be uploaded when you save the article</div>
+                <div v-if="isBase64Image" class="mt-1 text-xs text-amber-500">This image will be uploaded when you save this module</div>
             </div>
 
             <!-- Error message -->

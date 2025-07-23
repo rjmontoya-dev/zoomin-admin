@@ -73,7 +73,7 @@ const props = defineProps<{
     schema: Schema;
     selectedTab?: string;
 }>();
-console.log(props.page);
+
 // Form state management
 const form = ref<Record<string, any>>({
     title: props.page.title || '',
@@ -244,7 +244,7 @@ const getErrorMessage = (fieldId: string) => {
                         </Button>
                     </div>
             </template>
-            <BaseNavTabs v-if="tabs && tabs.length > 0" :tabs="tabs" v-model="activeTab" @update:model-value="value => console.log(value)" />
+            <BaseNavTabs v-if="tabs && tabs.length > 0" :tabs="tabs" v-model="activeTab" @update:model-value="value => value" />
         <div class="flex flex-1 flex-col gap-6">
             <!-- Tab Navigation -->
             <Tabs v-model="activeTab" class="w-full pb-40">
