@@ -18,6 +18,10 @@ const sidebarNavItems: NavItem[] = [
         title: 'Appearance',
         href: '/settings/appearance',
     },
+    {
+        title: '2FA Authentication',
+        href: '/settings/two-factor-authentication',
+    },
 ];
 
 const page = usePage();

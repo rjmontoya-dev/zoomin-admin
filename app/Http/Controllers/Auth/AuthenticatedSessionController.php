@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Inertia\Response;
+use Laravel\Fortify\Features;
+use Laravel\Fortify\Http\Controllers\TwoFactorAuthenticatedSessionController;
 
 class AuthenticatedSessionController extends Controller
 {

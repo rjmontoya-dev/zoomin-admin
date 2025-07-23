@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\Admin\ActivityLog\ActivityLogController;
 use App\Http\Controllers\Admin\Article\ArticleController;
+use App\Http\Controllers\Admin\Maintenance\MaintenanceController;
 use App\Http\Controllers\Admin\RolePermission\RolePermissionController;
 use App\Http\Controllers\Admin\User\UserController;
 use App\Http\Controllers\CmsPage\PagesController;
+use App\Http\Controllers\Settings\TwoFactorAuthController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -45,6 +47,14 @@ Route::prefix('admin')
                 Route::post('/{article}/restore', 'restore')->name('restore');
             });
 
+        Route::prefix('maintenance')
+            ->name('maintenance.')
+            ->controller(MaintenanceController::class)
+            ->group(function () {
+                Route::get('/', 'edit')->name('edit');
+                Route::post('/update', 'update')->name('update');
+            });
+
         Route::prefix('users')
             ->name('users.')
             ->controller(UserController::class)
@@ -77,3 +87,4 @@ Route::prefix('admin')
 
 require __DIR__ . '/settings.php';
 require __DIR__ . '/auth.php';
+require __DIR__ . '/two-factor.php';

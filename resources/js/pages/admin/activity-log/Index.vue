@@ -60,7 +60,7 @@ const breadcrumbs = [
             <div class=" h-full w-full  p-8 overflow-y-auto">
                 <BaseTable
                     :route="indexRoute"
-                    :data="data.data"
+                    :data="data"
                     :columns="COLUMNS"
                     :initial-sort="{ value: 'created_at', direction: 'desc' }"
                     :initial-per-page="meta.per_page"

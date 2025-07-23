@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Database\Seeders\Admin\Maintenance\MaintenanceSeeder;
 use Database\Seeders\Admin\RolePermission\PermissionSeeder;
 use Database\Seeders\Admin\RolePermission\RoleSeeder;
 use Database\Seeders\Admin\User\UserSeeder;
@@ -18,6 +19,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             RoleSeeder::class,
             PermissionSeeder::class,
+            MaintenanceSeeder::class,
         ]);
     }
 }

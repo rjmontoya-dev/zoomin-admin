@@ -28,7 +28,6 @@ const props = defineProps({
     required: true,
   },
 })
-console.log(props.item);
 const isShow = defineModel('isEditShow');
 
 const form = useForm({

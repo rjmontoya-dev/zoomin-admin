@@ -5,7 +5,7 @@ import NavUser from '@/components/NavUser.vue';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-vue-next';
+import { BookOpen, Folder, LayoutGrid, Notebook, Newspaper, Construction, FolderCog, Users, ScrollText } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 
 const mainNavItems: NavItem[] = [
@@ -17,12 +17,17 @@ const mainNavItems: NavItem[] = [
     {
         title: 'CMS',
         href: '/admin/cms',
-        icon: LayoutGrid,
+        icon: Notebook,
     },
     {
         title: 'Articles',
         href: '/admin/articles',
-        icon: LayoutGrid,
+        icon: Newspaper,
+    },
+    {
+        title: 'Maintenance',
+        href: '/admin/maintenance',
+        icon: Construction,
     },
     // {
     //     title: 'Notification',
@@ -32,17 +37,17 @@ const mainNavItems: NavItem[] = [
     {
         title: 'Roles & Permissions',
         href: '/admin/roles-permissions',
-        icon: LayoutGrid,
+        icon: FolderCog,
     },
     {
         title: 'Users',
         href: '/admin/users',
-        icon: LayoutGrid,
+        icon: Users,
     },
     {
         title: 'Activity Log',
         href: '/admin/activity-log',
-        icon: LayoutGrid,
+        icon: ScrollText,
     },
 ];
 

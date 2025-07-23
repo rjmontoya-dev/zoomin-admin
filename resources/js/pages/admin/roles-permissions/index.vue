@@ -30,7 +30,7 @@ const breadcrumbs = [
     <AppLayout>
         <AppMainContent :breadcrumbs="breadcrumbs" title="Roles & Permissions">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-                <Link v-for="role in props.data.data" :key="role.id" :href="route('admin.roles-permissions.edit', role.id)">
+                <Link v-for="role in props.data" :key="role.id" :href="route('admin.roles-permissions.edit', role.id)">
                     <Card class="hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
                         <CardHeader>
                             <CardTitle>{{ role.name }}</CardTitle>
