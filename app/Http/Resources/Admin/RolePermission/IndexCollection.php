@@ -17,10 +17,7 @@ class IndexCollection extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            // 'members' => $this->users,
-            // 'extra_members' => $this->users?->count() > 4
-            //     ? $this->users->count() - 4
-            //     : null,
+            'users' => $this->whenLoaded('users'),
         ];
     }
 }

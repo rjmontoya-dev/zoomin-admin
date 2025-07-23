@@ -7,6 +7,13 @@
         "laravel",
         "framework"
     ],
+    "authors": [
+        {
+            "name": "Roger Montoya Jr.",
+            "email": "rjmontoya.025@gmail.com",
+            "role": "FullStack Developer"
+        }
+    ],
     "license": "MIT",
     "require": {
         "php": "^8.2",
