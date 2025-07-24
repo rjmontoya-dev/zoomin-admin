@@ -59,7 +59,7 @@ const props = defineProps<{
     activeTab?: string;
     initialSort?: { value: string; direction: 'asc' | 'desc' };
     initialPerPage?: number;
-    meta: PaginationMeta[];
+    meta: PaginationMeta;
 }>();
 
 // Emits
@@ -94,7 +94,7 @@ const sorters = computed(() => [{ label: 'Date Created', value: 'created_at' }, 
 const queryOptions = reactive<QueryOptions>({
     page: 1,
     perPage: props.initialPerPage || 10,
-    tab: computed(() => props.activeTab || null),
+    tab: props.activeTab || null,
     sort: props.initialSort?.value || props.sorters?.[0]?.value || 'created_at',
     direction: props.initialSort?.direction || 'desc',
     search: null,
@@ -112,7 +112,7 @@ const selectedDate = ref(null);
 
 // --- COMPUTED ---
 const currentSortLabel = computed(() => {
-    return sorters?.value.find((s) => s.value === activeSort.value.value)?.label || 'Sort';
+    return sorters?.value.find((s: Sorter) => s.value === activeSort.value.value)?.label || 'Sort';
 });
 
 // --- GENERAL METHODS (moved from implementation) ---
@@ -137,7 +137,7 @@ const handleResetFilters = () => {
     selectedDate.value = null;
     if (props.filters) {
         Object.keys(props.filters).forEach((key) => {
-            activeFilters[key] = null;
+            (activeFilters as any)[key] = null;
         });
     }
     queryOptions.page = 1; // Reset to page 1
@@ -147,10 +147,6 @@ const handleResetFilters = () => {
 // --- UI EVENT HANDLERS ---
 const handleRowClick = (item: any) => emit('row:click', item);
 
-const handleSearch = () => {
-    queryOptions.search = searchQuery.value;
-    queryOptions.page = 1; // Reset to first page on search
-};
 
 const handleSortDirectionToggle = () => {
     const newDirection = activeSort.value.direction === 'asc' ? 'desc' : 'asc';
@@ -185,8 +181,23 @@ const applyFilters = () => {
 // --- WATCHERS ---
 
 watch(
+    searchQuery,
+    debounce((newSearch: string) => {
+        queryOptions.search = newSearch;
+        queryOptions.page = 1;
+    }, 300)
+);
+
+watch(
+    () => props.activeTab,
+    (newTab: string | undefined) => {
+        queryOptions.tab = newTab || null;
+    }
+);
+
+watch(
   queryOptions,
-  debounce((newQuery) => {
+  debounce((newQuery: QueryOptions) => {
     const params = {
       ...newQuery,
       filters: Object.fromEntries(
@@ -211,7 +222,7 @@ watch(
         <div class="mr-6 ml-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <div class="relative max-w-full flex-1">
                 <Search class="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-400" />
-                <Input v-model="searchQuery" placeholder="Search..." class="pl-10" @keyup.enter="handleSearch" />
+                <Input v-model="searchQuery" placeholder="Search..." class="pl-10" />
             </div>
 
             <div class="flex items-center gap-2">
