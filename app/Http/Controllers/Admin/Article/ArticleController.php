@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Article;
 
+use App\Enums\Statuses\ArticleStatus;
 use App\Http\Controllers\Base\BaseController;
 use App\Http\Requests\Admin\Article\ArticleStoreRequest;
 use App\Http\Resources\Admin\Article\IndexCollection;
@@ -51,13 +52,17 @@ class ArticleController extends BaseController
         return 'admin.articles';
     }
 
-
+    public function additionalProps(){
+        return [
+            'status' => ArticleStatus::getOptionList()
+        ];
+    }
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request): Response
     {
-        return parent::baseIndex($request);
+        return parent::baseIndex($request, $this->additionalProps());
     }
 
     /**
@@ -65,7 +70,7 @@ class ArticleController extends BaseController
      */
     public function create(Request $request): Response
     {
-        return parent::baseCreate($request);
+        return parent::baseCreate($request, $this->additionalProps());
     }
 
     /**
@@ -81,14 +86,7 @@ class ArticleController extends BaseController
      */
     public function edit(Request $request, Article $article): Response
     {
-        $props = [
-            'status' => [
-                ['value' => 'draft', 'label' => 'Draft'],
-                ['value' => 'publish', 'label' => 'publish'],
-            ],
-        ];
-
-        return parent::baseEdit($request, $article, $props);
+        return parent::baseEdit($request, $article, $this->additionalProps());
     }
 
     /**

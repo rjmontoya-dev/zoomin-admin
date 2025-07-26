@@ -8,7 +8,8 @@ defineProps({
     form: {
         type: Object,
         required: true
-    }
+    },
+    statuses: Object,
 })
 
 const emit = defineEmits(['submit','cancel']);
@@ -45,10 +46,11 @@ const emit = defineEmits(['submit','cancel']);
             <!-- Status (Select Dropdown) -->
             <div class="space-y-2 pb-4">
                 <label class="block text-sm font-medium text-gray-900 dark:text-white">Status</label>
-                <select v-model="form.status" class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm">
+                <select v-model="form.status" place-holder="Select" class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm">
                     <option disabled value="">Select status</option>
-                    <option value="draft">Draft</option>
-                    <option value="publish">Published</option>
+                    <option v-for="status in statuses" :key="status.id" :value="status.id">
+                        {{ status.label }}
+                    </option>
                 </select>
                 <span class="text-sm text-red-500 italic" v-if="form.errors.status"> {{  form?.errors?.status  }}</span>
             </div>

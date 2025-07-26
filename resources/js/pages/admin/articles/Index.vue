@@ -66,6 +66,7 @@ const props = defineProps<{
   },
   tabCounts: TabCounts,
   meta: Meta,
+  additionalProps: Object,
 }>()
 
 const indexRoute = ref(route('admin.articles.index'));
@@ -167,9 +168,8 @@ const restore = (id: number) => {
                                 <label class="text-sm font-medium text-gray-900 dark:text-white">Status</label>
                                 <select v-model="filters.status" class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm">
                                     <option value="">All Statuses</option>
-                                    <option value="publish">Published</option>
-                                    <option value="draft">Draft</option>
-                                    <option value="archived">Archived</option>
+                                    <option v-for="status in additionalProps?.status" :key="status.id" :value="status.id">{{ status.label}}</option>
+
                                 </select>
                             </div>
                         </div>
@@ -187,9 +187,8 @@ const restore = (id: number) => {
                     <template #cell-status="{ item }">
                         <Badge
                             :class="{
-                                'border-green-500 bg-green-50 text-green-700': item.status === 'Active',
-                                'border-yellow-500 bg-yellow-50 text-yellow-700': item.status === 'On Hold',
-                                'border-gray-500 bg-gray-50 text-gray-700': item.status === 'Closed',
+                                'border-green-500 bg-green-50 text-green-700': item.status.title === 'Publish',
+                                'border-yellow-500 bg-yellow-50 text-yellow-700': item.status.title === 'Draft',
                             }"
                             variant="outline"
                         >

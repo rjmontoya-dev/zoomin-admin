@@ -24,7 +24,7 @@ class ArticleStoreRequest extends FormRequest
         return [
             'title' => ['required','string'],
             'author' => ['required','string'],
-            'status' => ['required','string'],
+            'status' => ['required'],
             'body' => ['required','string']
         ];
     }

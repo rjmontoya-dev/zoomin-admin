@@ -18,7 +18,7 @@ class IndexCollection extends JsonResource
             'id' => $this->id,
             'title' => $this->title ?? null,
             'author' => $this->author ?? null,
-            'status' => $this->status ?? null,
+            'status' => $this->status->pill() ?? null,
             'created_at' => $this->created_at ?? null,
         ];
     }

@@ -2,6 +2,7 @@
 
 namespace App\Models\Admin;
 
+use App\Enums\Statuses\ArticleStatus;
 use App\Models\System\BaseModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -19,6 +20,7 @@ class Article extends BaseModel
     ];
 
     protected $casts = [
+        'status'=> ArticleStatus::class,
         'body' => 'array',
     ];
 }

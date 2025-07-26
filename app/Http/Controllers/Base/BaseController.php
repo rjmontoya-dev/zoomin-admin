@@ -73,7 +73,7 @@ abstract class BaseController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function baseIndex(Request $request): Response
+    public function baseIndex(Request $request, $props = []): Response
     {
         $data = $this->service->index($request);
 
@@ -81,7 +81,8 @@ abstract class BaseController extends Controller
             'data' => $data['data'],
             'tabCounts' => $data['tabCounts'],
             'meta' => $data['meta'],
-        ], $this->getIndexProps($request)));
+            'additionalProps' => $props,
+        ]));
     }
 
     /**

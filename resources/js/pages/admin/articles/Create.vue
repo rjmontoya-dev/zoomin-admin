@@ -18,6 +18,7 @@ interface Tab {
 
 const isShow = defineModel('isShow')
 const props = defineProps({
+    status: Object,
     isShow: Boolean,
     title: String,
     buttonTitle: String,
@@ -75,7 +76,7 @@ const submit = () => {
             <div class="flex-1 overflow-y-auto p-6">
                 <div class="flex justify-center">
                     <div class="w-full max-w-2xl rounded border bg-white p-6 shadow">
-                        <FormSection :form="form" :buttonTitle="buttonTitle" />
+                        <FormSection :form="form" :statuses="status" :buttonTitle="buttonTitle" />
 
                         <!-- Sticky button container -->
                         <div class="sticky bottom-0 mt-6 flex justify-end space-x-3 border-t bg-white p-4">
