@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Api\PagesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/user', function (Request $request) {
-   return $request->user();
+Route::middleware('verifyApiKey')->group(function () {
+
+    Route::get('/{slug}/cms', [PagesController::class, 'getCms'])->name('cms');
 });

@@ -23,6 +23,10 @@ return Application::configure(basePath: dirname(__DIR__))
             HandleInertiaRequests::class,
             AddLinkHeadersForPreloadedAssets::class,
         ]);
+
+        $middleware->alias([
+            'verifyApiKey' => \App\Http\Middleware\VerifyApiKey::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

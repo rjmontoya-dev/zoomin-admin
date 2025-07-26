@@ -122,5 +122,15 @@ return [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
+/*
+    |--------------------------------------------------------------------------
+    | API Key
+    |--------------------------------------------------------------------------
+    |
+    | This key is used to authenticate with the API.
+    |
+    */
+
+    'api_key' => env('API_KEY'),
 
 ];

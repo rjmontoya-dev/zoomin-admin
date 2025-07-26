@@ -145,6 +145,28 @@ return [
                             'label' => 'Logo',
                             'description' => 'Max file size: 2MB | Dimension: Max height: 32px',
                         ],
+                        [
+                            'id' => 'menus',
+                            'type' => 'list_table',
+                            'label' => "Navigation Menu's",
+                            'description' => '',
+                            'items' => [
+                                [
+                                    'id' => 'text',
+                                    'label' => 'Item',
+                                    'type' => 'text',
+                                    'rules' => 'required',
+                                    'summary_field' => true,
+                                ],
+                                  [
+                                    'id' => 'link',
+                                    'label' => 'Url',
+                                    'type' => 'text',
+                                    'rules' => 'required',
+                                    'summary_field' => true,
+                                ],
+                            ],
+                        ],
                     ],
                 ],
                 [
