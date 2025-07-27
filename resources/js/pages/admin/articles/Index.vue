@@ -186,14 +186,12 @@ const restore = (id: number) => {
 
                     <template #cell-status="{ item }">
                         <Badge
-                            :class="{
-                                'border-green-500 bg-green-50 text-green-700': item.status.title === 'Publish',
-                                'border-yellow-500 bg-yellow-50 text-yellow-700': item.status.title === 'Draft',
-                            }"
+                            :class="`border-${item.status.color}-500 bg-${item.status.color}-50 text-${item.status.color}-700`"
                             variant="outline"
-                        >
-                            {{ item.status }}
+                            >
+                            {{ item.status.title }}
                         </Badge>
+
                     </template>
                     <template #cell-created_at="{ item }">
                         <span

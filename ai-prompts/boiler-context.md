@@ -16,6 +16,16 @@ The project uses a **Service-Controller pattern** with **Base Class Abstraction*
 3.  **API Resources for Transformation:** Data returned to the Inertia frontend must be formatted using `JsonResource` classes.
 4.  **Named Routes:** All routes must be named and grouped logically within the `routes/web.php` file.
 
+## Enum Handling with `HandleEnum` Trait
+
+The project uses the `App\Http\Traits\HandleEnum` trait to add extra functionality to PHP enums. It helps you associate metadata (like titles and colors) with enum cases and provides helper methods to get this data for your UI.
+
+### How to Use `HandleEnum`
+
+To use it, add the `HandleEnum` trait to your enum and define a `metaProperties()` static method. This method should return an array where each item contains metadata for an enum case, including a required `value` key.
+
+#### Example: `app/Enums/Statuses/ArticleStatus.php`
+
 ## Task: Create a New CRUD Module for "{FEATURE_NAME}"
 
 Your goal is to create all the necessary files for a new CRUD module for **{FEATURE_NAME}**. Please generate the files one by one, following the structure below.
@@ -58,6 +68,7 @@ Your goal is to create all the necessary files for a new CRUD module for **{FEAT
     - Use the new controller and name the routes appropriately (e.g., `admin.{feature_name}.index`).
 
 8.  **Frontend (Vue Components):**
-    - I will handle the frontend Vue components separately after the backend is complete.
+    - Place your files under the directory: `admin/{feature_name}`. The following files should be created as needed: `Create`  `Edit` `Index`  `components/FormSection` 
+    - For reference, you can check the structure and implementation in `admin/articles`.
 
 Please start with step 1 and ask for confirmation before proceeding to the next step.

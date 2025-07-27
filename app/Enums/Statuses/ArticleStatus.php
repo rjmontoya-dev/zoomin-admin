@@ -22,10 +22,12 @@ enum ArticleStatus: int
             [
                 'value' => self::DRAFT,
                 'title' => 'Draft',
+                'color' => 'yellow'
             ],
             [
                 'value' => self::PUBLISH,
                 'title' => 'Publish',
+                'color' => 'green'
             ],
         ];
     }
