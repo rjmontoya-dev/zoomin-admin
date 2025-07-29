@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\ActivityLog\ActivityLogController;
 use App\Http\Controllers\Admin\Article\ArticleController;
 use App\Http\Controllers\Admin\Maintenance\MaintenanceController;
 use App\Http\Controllers\Admin\Project\ProjectController;
+use App\Http\Controllers\Admin\Repair\RepairController;
 use App\Http\Controllers\Admin\RolePermission\RolePermissionController;
 use App\Http\Controllers\Admin\User\UserController;
 use App\Http\Controllers\CmsPage\PagesController;
@@ -97,6 +98,18 @@ Route::prefix('admin')
                 Route::patch('/{project}/update-status', 'updateStatus')->name('update-status');
                 Route::delete('/{project}/archive', 'archive')->name('archive');
                 Route::post('/{project}/restore', 'restore')->name('restore');
+            });
+        Route::prefix('projects/{project}/repairs')
+            ->name('projects.repairs.')
+            ->controller(RepairController::class)
+            ->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::get('/create', 'create')->name('create');
+                Route::post('/store', 'store')->name('store');
+                Route::get('/{repair}/edit', 'edit')->name('edit');
+                Route::post('/{repair}/update', 'update')->name('update');
+                Route::delete('/{repair}/archive', 'archive')->name('archive');
+                Route::post('/{repair}/restore', 'restore')->name('restore');
             });
     });
 

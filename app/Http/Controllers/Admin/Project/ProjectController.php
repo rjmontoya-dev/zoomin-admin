@@ -118,8 +118,13 @@ class ProjectController extends BaseController
         return redirect()->back();
     }
 
-    public function destroy(string $id): RedirectResponse
+      public function archive(Project $project)
     {
-        return $this->baseDestroy($id);
+        return parent::baseArchive($project->id);
+    }
+
+    public function restore($id)
+    {
+        return parent::baseRestore($id);
     }
 }

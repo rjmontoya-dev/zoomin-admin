@@ -5,7 +5,7 @@ import { router, usePage } from '@inertiajs/vue3'
 import AppLayout from '@/layouts/AppLayout.vue'
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
-import { MoreHorizontal, PlusCircle, Edit, Trash2, ArchiveRestore } from 'lucide-vue-next'
+import { MoreHorizontal, PlusCircle, Edit, Trash2, ArchiveRestore, EyeIcon, File } from 'lucide-vue-next'
 import BaseNavTabs from '@/components/base/BaseNavTabs.vue'
 import { Toaster, toast } from 'vue-sonner'
 import 'vue-sonner/style.css'
@@ -77,7 +77,7 @@ const create = () => {
 
 const archive = (id: number) => {
   isLoading.value = true
-  router.delete(route('admin.projects.destroy', id), {
+  router.delete(route('admin.projects.archive', id), {
     preserveScroll: true,
     onSuccess: () => {
       isLoading.value = false
@@ -151,12 +151,16 @@ const restore = (id: number) => {
                     <DropdownMenuContent align="end">
                         <template v-if="activeTab !== 'archived'">
                             <DropdownMenuItem @click="router.get(route('admin.projects.show', item.id))">
-                                <Edit class="mr-2 h-4 w-4" />
+                                <EyeIcon class="mr-2 h-4 w-4" />
                                 Show
                             </DropdownMenuItem>
                             <DropdownMenuItem @click="router.get(route('admin.projects.edit', item.id))">
                                 <Edit class="mr-2 h-4 w-4" />
                                 Edit
+                            </DropdownMenuItem>
+                            <DropdownMenuItem @click="router.get(route('admin.projects.repairs.index', item.id))">
+                                <File class="mr-2 h-4 w-4" />
+                                Repair History
                             </DropdownMenuItem>
                             <DropdownMenuItem @click="archive(item.id)">
                                 <Trash2 class="mr-2 h-4 w-4" />
