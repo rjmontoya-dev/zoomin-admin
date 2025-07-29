@@ -20,6 +20,11 @@ const mainNavItems: NavItem[] = [
         icon: Notebook,
     },
     {
+        title: 'Projects Monitoring',
+        href: '/admin/projects',
+        icon: Notebook,
+    },
+    {
         title: 'Articles',
         href: '/admin/articles',
         icon: Newspaper,

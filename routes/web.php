@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\ActivityLog\ActivityLogController;
 use App\Http\Controllers\Admin\Article\ArticleController;
 use App\Http\Controllers\Admin\Maintenance\MaintenanceController;
+use App\Http\Controllers\Admin\Project\ProjectController;
 use App\Http\Controllers\Admin\RolePermission\RolePermissionController;
 use App\Http\Controllers\Admin\User\UserController;
 use App\Http\Controllers\CmsPage\PagesController;
@@ -82,6 +83,20 @@ Route::prefix('admin')
             ->controller(ActivityLogController::class)
             ->group(function () {
                 Route::get('/', 'index')->name('index');
+            });
+        Route::prefix('projects')
+            ->name('projects.')
+            ->controller(ProjectController::class)
+            ->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::get('/create', 'create')->name('create');
+                Route::post('/store', 'store')->name('store');
+Route::get('/{project}', 'show')->name('show');
+                Route::get('/{project}/edit', 'edit')->name('edit');
+                Route::post('/{project}/update', 'update')->name('update');
+Route::patch('/{project}/update-status', 'updateStatus')->name('update-status');
+                Route::delete('/{project}/archive', 'archive')->name('archive');
+                Route::post('/{project}/restore', 'restore')->name('restore');
             });
     });
 

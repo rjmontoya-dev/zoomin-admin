@@ -7,7 +7,11 @@ const props = defineProps<{
   defaultValue?: string | number
   modelValue?: string | number
   error?: string
-  placeholder?: sting
+  placeholder?: string,
+  type: {
+    type: String,
+    default: 'text',
+  },
   class?: HTMLAttributes['class']
 }>()
 
@@ -23,6 +27,7 @@ const modelValue = useVModel(props, 'modelValue', emits, {
 
 <template>
   <input
+    :type="type"
     v-model="modelValue"
     :placeholder="placeholder"
     data-slot="input"

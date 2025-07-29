@@ -33,6 +33,7 @@
     "@ckeditor/ckeditor5-build-classic": "^43.1.0",
     "@ckeditor/ckeditor5-vue": "^7.1.0",
     "@inertiajs/vue3": "^2.0.0",
+    "@internationalized/date": "^3.8.2",
     "@radix-ui/react-switch": "^1.2.5",
     "@tailwindcss/vite": "^4.1.1",
     "@tanstack/vue-table": "^8.21.3",

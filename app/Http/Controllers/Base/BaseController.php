@@ -123,17 +123,17 @@ abstract class BaseController extends Controller
 
         return Inertia::render(
             $this->getViewPath() . '/Edit',
-            $viewProps
+            array_merge($viewProps, $props)
         );
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function baseUpdate(Request $request, string $id): RedirectResponse
+    public function baseUpdate(Request $request, Model $model): RedirectResponse
     {
         try {
-            $resource = $this->service->update($request, $id);
+            $resource = $this->service->update($request, $model);
 
             return redirect()
                 ->back()
