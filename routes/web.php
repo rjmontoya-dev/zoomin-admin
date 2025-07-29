@@ -91,10 +91,10 @@ Route::prefix('admin')
                 Route::get('/', 'index')->name('index');
                 Route::get('/create', 'create')->name('create');
                 Route::post('/store', 'store')->name('store');
-Route::get('/{project}', 'show')->name('show');
+                Route::get('/{project}', 'show')->name('show');
                 Route::get('/{project}/edit', 'edit')->name('edit');
                 Route::post('/{project}/update', 'update')->name('update');
-Route::patch('/{project}/update-status', 'updateStatus')->name('update-status');
+                Route::patch('/{project}/update-status', 'updateStatus')->name('update-status');
                 Route::delete('/{project}/archive', 'archive')->name('archive');
                 Route::post('/{project}/restore', 'restore')->name('restore');
             });

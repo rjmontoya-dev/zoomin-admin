@@ -150,6 +150,10 @@ const restore = (id: number) => {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                         <template v-if="activeTab !== 'archived'">
+                            <DropdownMenuItem @click="router.get(route('admin.projects.show', item.id))">
+                                <Edit class="mr-2 h-4 w-4" />
+                                Show
+                            </DropdownMenuItem>
                             <DropdownMenuItem @click="router.get(route('admin.projects.edit', item.id))">
                                 <Edit class="mr-2 h-4 w-4" />
                                 Edit

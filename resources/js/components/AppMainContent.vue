@@ -13,7 +13,7 @@ const props = withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-    <div class="h-[calc(100vh-80px)] flex flex-col">
+    <div class="  flex flex-col">
         <!-- Header section - fixed height -->
         <div class="flex items-center justify-between py-8 px-6 border-b border-gray-100 dark:border-zinc-800 shrink-0">
             <div class="space-y-3">

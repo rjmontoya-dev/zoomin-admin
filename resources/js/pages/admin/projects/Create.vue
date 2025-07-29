@@ -2,6 +2,7 @@
 import AppMainContent from '@/components/AppMainContent.vue'
 import { Button } from '@/components/ui/button'
 import { Toaster } from '@/components/ui/sonner'
+import LoadingPage from '@/components/shared/LoadingPage.vue'
 import AppLayout from '@/layouts/AppLayout.vue'
 import { router, useForm } from '@inertiajs/vue3'
 import { ref } from 'vue'
@@ -103,6 +104,7 @@ const cancel = () => {
 
 <template>
   <Toaster :expand="true" richColors />
+  <LoadingPage :isLoading="isLoading" />
   <AppLayout>
     <AppMainContent :breadcrumbs="breadcrumbs" title="Create Project">
       <div class="flex-1 overflow-y-auto p-6">

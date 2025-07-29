@@ -10,6 +10,7 @@ use App\Http\Requests\Admin\Project\ProjectStoreRequest;
 use App\Http\Requests\Admin\Project\ProjectUpdateRequest;
 use App\Http\Resources\Admin\Project\EditResource;
 use App\Http\Resources\Admin\Project\IndexCollection;
+use App\Http\Resources\Admin\Project\ProjectShowResource;
 use App\Http\Service\Project\ProjectService;
 use App\Models\Admin\Project;
 use Illuminate\Http\Request;
@@ -98,6 +99,23 @@ class ProjectController extends BaseController
     public function update(ProjectUpdateRequest $request, Project $project): RedirectResponse
     {
         return $this->baseUpdate($request, $project);
+    }
+
+    public function show(Project $project): Response
+    {
+        $project->load('paymentDetail.paymentSchedules', 'repairs');
+
+        return inertia('admin/projects/Show', [
+            'project' => new ProjectShowResource($project),
+            'projectStatuses' => ProjectStatus::getOptionList(),
+        ]);
+    }
+
+    public function updateStatus(Request $request, Project $project): RedirectResponse
+    {
+        $project->update($request->only('status'));
+
+        return redirect()->back();
     }
 
     public function destroy(string $id): RedirectResponse
