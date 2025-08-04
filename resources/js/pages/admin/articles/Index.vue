@@ -134,7 +134,7 @@ const restore = (id: number) => {
 
 </script>
 <template>
-    <Toaster :expand="true"  />
+    <Toaster :expand="true" richColors />
     <LoadingPage :isLoading="isLoading" />
     <AppLayout>
         <AppMainContent :breadcrumbs="breadcrumbs" title="Articles">

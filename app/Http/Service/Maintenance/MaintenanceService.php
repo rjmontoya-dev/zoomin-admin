@@ -7,6 +7,7 @@ use App\Http\Traits\FileHandler;
 use App\Jobs\Maintenance\MaintenanceScheduler;
 use App\Models\Admin\Maintenance\Maintenance;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -14,9 +15,9 @@ class MaintenanceService extends BaseService
 {
     use FileHandler;
 
-    public function update(Request $request, string $id): Maintenance
+    public function update(Request $request, Model $model): Model
     {
-        $maintenance = $this->model->findOrFail($id);
+        // $model = $this->model->findOrFail($id);
         $data = $request->validated();
 
         if ($data['maintenance_type'] === 'immediate') {
@@ -28,8 +29,8 @@ class MaintenanceService extends BaseService
         }
 
         if (array_key_exists('image', $data)) {
-            if ($maintenance->image) {
-                $oldImagePath = str_replace(Storage::url(''), '', $maintenance->image);
+            if ($model->image) {
+                $oldImagePath = str_replace(Storage::url(''), '', $model->image);
                 Storage::disk('public')->delete($oldImagePath);
             }
 
@@ -48,16 +49,16 @@ class MaintenanceService extends BaseService
         $maintenanceType = $data['maintenance_type'];
         unset($data['maintenance_type']);
 
-        $maintenance->update($data);
+        $model->update($data);
 
         if ($maintenanceType === 'scheduled' && isset($data['start_at']) && Carbon::parse($data['start_at'])->isFuture()) {
-            MaintenanceScheduler::dispatch($maintenance, 'enabled')->delay(Carbon::parse(time: $data['start_at']));
+            MaintenanceScheduler::dispatch($model, 'enabled')->delay(Carbon::parse(time: $data['start_at']));
 
             if (isset($data['end_at']) && Carbon::parse($data['end_at'])->isFuture()) {
-                MaintenanceScheduler::dispatch($maintenance, 'disabled')->delay(Carbon::parse(time: $data['end_at']));
+                MaintenanceScheduler::dispatch($model, 'disabled')->delay(Carbon::parse(time: $data['end_at']));
             }
         }
 
-        return $maintenance;
+        return $model;
     }
 }

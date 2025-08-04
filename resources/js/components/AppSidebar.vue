@@ -5,49 +5,64 @@ import NavUser from '@/components/NavUser.vue';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid, Notebook, Newspaper, Construction, FolderCog, Users, ScrollText } from 'lucide-vue-next';
+import { BookOpen, Folder, LayoutGrid, Notebook, Newspaper, Construction, FolderCog, Users, ScrollText, CalendarArrowUpIcon, MonitorCheck } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 
-const mainNavItems: NavItem[] = [
+const navGroups = [
     {
-        title: 'Dashboard',
-        href: '/dashboard',
-        icon: LayoutGrid,
+        title: 'Admin System',
+        items: [
+            {
+                title: 'Dashboard',
+                href: '/dashboard',
+                icon: LayoutGrid,
+            },
+            {
+                title: 'Schedules',
+                href: '/admin/schedules',
+                icon: CalendarArrowUpIcon,
+            },
+            {
+                title: 'Projects Monitoring',
+                href: '/admin/projects',
+                icon: MonitorCheck,
+            },
+            {
+                title: 'Roles & Permissions',
+                href: '/admin/roles-permissions',
+                icon: FolderCog,
+            },
+            {
+                title: 'Users',
+                href: '/admin/users',
+                icon: Users,
+            },
+            {
+                title: 'Activity Log',
+                href: '/admin/activity-log',
+                icon: ScrollText,
+            },
+        ],
     },
     {
-        title: 'CMS',
-        href: '/admin/cms',
-        icon: Notebook,
-    },
-    {
-        title: 'Articles',
-        href: '/admin/articles',
-        icon: Newspaper,
-    },
-    {
-        title: 'Maintenance',
-        href: '/admin/maintenance',
-        icon: Construction,
-    },
-    // {
-    //     title: 'Notification',
-    //     href: '/admin/articles',
-    //     icon: LayoutGrid,
-    // },
-    {
-        title: 'Roles & Permissions',
-        href: '/admin/roles-permissions',
-        icon: FolderCog,
-    },
-    {
-        title: 'Users',
-        href: '/admin/users',
-        icon: Users,
-    },
-    {
-        title: 'Activity Log',
-        href: '/admin/activity-log',
-        icon: ScrollText,
+        title: 'Content Management',
+        items: [
+            {
+                title: 'CMS',
+                href: '/admin/cms',
+                icon: Notebook,
+            },
+            {
+                title: 'Articles',
+                href: '/admin/articles',
+                icon: Newspaper,
+            },
+            // {
+            //     title: 'Maintenance',
+            //     href: '/admin/maintenance',
+            //     icon: Construction,
+            // },
+        ],
     },
 ];
 
@@ -80,7 +95,7 @@ const footerNavItems: NavItem[] = [
         </SidebarHeader>
 
         <SidebarContent>
-            <NavMain :items="mainNavItems" />
+            <NavMain :groups="navGroups" />
         </SidebarContent>
 
         <SidebarFooter>

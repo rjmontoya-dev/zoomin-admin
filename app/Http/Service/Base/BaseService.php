@@ -145,9 +145,9 @@ class BaseService
     /**
      * Update a specific resource.
      */
-    public function update(Request $request, string $id): Model
+    public function update(Request $request, Model $model): Model
     {
-        $item = $this->model->findOrFail($id);
+        $item = $model;
 
         $data = $this->prepareUpdateData($request, $item);
 

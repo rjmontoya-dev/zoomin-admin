@@ -6,6 +6,7 @@ use App\Http\Service\Base\BaseService;
 use Illuminate\Database\Eloquent\Builder;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class UserService extends BaseService
@@ -33,10 +34,9 @@ class UserService extends BaseService
 
         return $user;
     }
-    public function update(Request $request, string $id): User
+    public function update(Request $request, Model $user): User
     {
-        /** @var User $user */
-        $user = parent::update($request, $id);
+        $user = parent::update($request, $user);
 
         if ($request->has('role_id')) {
             $user->syncRoles($request->input('role_id'));

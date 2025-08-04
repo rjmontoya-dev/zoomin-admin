@@ -11,10 +11,19 @@ You are an expert Laravel and Vue.js developer. Your task is to help me build a 
 ## Key Architectural Patterns
 The project uses a **Service-Controller pattern** with **Base Class Abstraction** to enforce DRY principles and maintainability.
 
-1.  **`BaseController` & `BaseService`:** All new modules must extend these base classes. The controller's responsibility is to handle HTTP requests and responses, while the service handles all business logic (querying, filtering, data manipulation).
+1.  **`BaseController` & `BaseService`:** All new modules must extend these base classes. The controller's responsibility is to handle HTTP requests and responses, while the service handles all business logic.
+    *   **`BaseController`**: Manages the basic CRUD flow (`index`, `create`, `store`, `edit`, `update`, `destroy`, `archive`, `restore`) by calling the corresponding service methods. It requires child controllers to define the model, service, resources, and view path.
+    *   **`BaseService`**: Handles all business logic, including querying, filtering, sorting, pagination, and data manipulation. It provides a structured way to manage data operations and can be extended by child services to define searchable fields, filters, and sorters.
 2.  **`FormRequest` for Validation:** All `store` and `update` operations must use dedicated `FormRequest` classes for validation.
 3.  **API Resources for Transformation:** Data returned to the Inertia frontend must be formatted using `JsonResource` classes.
-4.  **Named Routes:** All routes must be named and grouped logically within the `routes/web.php` file.
+4.  **Named Routes:** All routes must be named and grouped logically within the `routes/web.php` file, using prefixes for organization.
+
+## Model Architecture
+
+1.  **`BaseModel`**: All models should extend `App\Models\System\BaseModel`. This base model automatically integrates activity logging.
+2.  **`LogsActivity` Trait**: This trait, used in `BaseModel`, leverages the `spatie/laravel-activitylog` package to automatically log model events (created, updated, deleted).
+3.  **`PrettyLog` Trait**: This custom trait enhances the activity log descriptions to be more human-readable, including which user performed the action.
+4.  **`SoftDeletes`**: Models should use the `SoftDeletes` trait to enable archiving and restoring functionality.
 
 ## Enum Handling with `HandleEnum` Trait
 
@@ -24,7 +33,7 @@ The project uses the `App\Http\Traits\HandleEnum` trait to add extra functionali
 
 To use it, add the `HandleEnum` trait to your enum and define a `metaProperties()` static method. This method should return an array where each item contains metadata for an enum case, including a required `value` key.
 
-#### Example: `app/Enums/Statuses/ArticleStatus.php`
+#### Example: `app/Enums/Statuses/ProjectStatus.php`
 
 ## Task: Create a New CRUD Module for "{FEATURE_NAME}"
 
@@ -67,8 +76,5 @@ Your goal is to create all the necessary files for a new CRUD module for **{FEAT
     - Add the resource routes to `routes/web.php` under the `admin` prefix group.
     - Use the new controller and name the routes appropriately (e.g., `admin.{feature_name}.index`).
 
-8.  **Frontend (Vue Components):**
-    - Place your files under the directory: `admin/{feature_name}`. The following files should be created as needed: `Create`  `Edit` `Index`  `components/FormSection` 
-    - For reference, you can check the structure and implementation in `admin/articles`.
 
 Please start with step 1 and ask for confirmation before proceeding to the next step.
