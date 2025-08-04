@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\Project\ProjectController;
 use App\Http\Controllers\Admin\Repair\RepairController;
 use App\Http\Controllers\Admin\RolePermission\RolePermissionController;
 use App\Http\Controllers\Admin\User\UserController;
+use App\Http\Controllers\Admin\ScheduleController;
 use App\Http\Controllers\CmsPage\PagesController;
 use App\Http\Controllers\Settings\TwoFactorAuthController;
 use Illuminate\Support\Facades\Route;
@@ -110,6 +111,14 @@ Route::prefix('admin')
                 Route::post('/{repair}/update', 'update')->name('update');
                 Route::delete('/{repair}/archive', 'archive')->name('archive');
                 Route::post('/{repair}/restore', 'restore')->name('restore');
+            });
+
+        Route::prefix('schedules')
+            ->name('schedules.')
+            ->controller(ScheduleController::class)
+            ->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::get('/data', 'schedules')->name('data');
             });
     });
 

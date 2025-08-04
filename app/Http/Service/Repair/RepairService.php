@@ -34,6 +34,16 @@ class RepairService extends BaseService
         ]);
     }
 
+    public function index(Request $request): array
+    {
+        if ($request->has('project_id')) {
+            $request->merge([
+                'filters' => array_merge($request->input('filters', []), ['project_id' => $request->project_id])
+            ]);
+        }
+
+        return parent::index($request);
+    }
     public function repairStore(Request $request, Model $model)
     {
         $data = $request->validated(); 

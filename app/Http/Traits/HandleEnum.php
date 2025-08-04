@@ -226,6 +226,7 @@ trait HandleEnum
         return [
             'title' => $this->meta('title'),
             'color' => $this->meta('color'),
+            'value' => $this->meta('value'),
         ];
     }
 }

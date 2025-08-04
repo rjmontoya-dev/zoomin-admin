@@ -408,7 +408,7 @@ const paymentScheduleErrors = computed(() => {
               <TableCell>{{ schedule.status }}</TableCell>
               <TableCell class="space-x-2">
                 <Button variant="outline" size="sm" @click="editSchedule(index)">Edit</Button>
-                <Button variant="destructive" size="sm" @click="removeSchedule(index)">Remove</Button>
+                <Button v-if="form.payment_details.payment_schedules[editingScheduleIndex]" variant="destructive" size="sm" @click="removeSchedule(index)">Remove</Button>
               </TableCell>
             </TableRow>
           </TableBody>

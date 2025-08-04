@@ -13,6 +13,8 @@ import { Toaster, toast } from 'vue-sonner'
 import 'vue-sonner/style.css'
 import LoadingPage from '@/components/shared/LoadingPage.vue';
 import { useDateFormat } from '@/composables/useDateFormat';
+import { ProjectStatus } from '@/pages/Enums/ProjectStatus'
+
 
 interface Repair {
     id: number;
@@ -163,7 +165,7 @@ const restore = (id: number) => {
         <AppMainContent :breadcrumbs="breadcrumbs" :title="`Repair History for ${project.project_code}`">
             <template #button>
                 <div class="flex space-x-2 self-start">
-                    <Button variant="outline" @click="create()">
+                    <Button v-if="project.status === ProjectStatus.COMPLETED || project.status  === ProjectStatus.WITH_REPAIR" variant="outline" @click="create()">
                         <PlusCircle class="mr-2 h-4 w-4" />
                         Create
                     </Button>
