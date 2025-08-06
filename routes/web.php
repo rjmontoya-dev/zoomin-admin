@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\ActivityLog\ActivityLogController;
 use App\Http\Controllers\Admin\Article\ArticleController;
+use App\Http\Controllers\Admin\Inquiry\InquiryController;
 use App\Http\Controllers\Admin\Maintenance\MaintenanceController;
 use App\Http\Controllers\Admin\Project\ProjectController;
 use App\Http\Controllers\Admin\Repair\RepairController;
@@ -119,6 +120,15 @@ Route::prefix('admin')
             ->group(function () {
                 Route::get('/', 'index')->name('index');
                 Route::get('/data', 'schedules')->name('data');
+            });
+        Route::prefix('inquiry')
+            ->name('inquiry.')
+            ->controller(InquiryController::class)
+            ->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::get('/{inquiry}', 'show')->name('show');
+                Route::delete('/{inquiry}/archive', 'archive')->name('archive');
+                Route::post('/{inquiry}/restore', 'restore')->name('restore');
             });
     });
 

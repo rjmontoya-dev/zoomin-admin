@@ -52,9 +52,14 @@ const navGroups = [
                 href: '/admin/cms',
                 icon: Notebook,
             },
+            // {
+            //     title: 'Articles',
+            //     href: '/admin/articles',
+            //     icon: Newspaper,
+            // },
             {
-                title: 'Articles',
-                href: '/admin/articles',
+                title: 'Inquiries',
+                href: '/admin/inquiry',
                 icon: Newspaper,
             },
             // {
