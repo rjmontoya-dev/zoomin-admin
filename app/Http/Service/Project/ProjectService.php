@@ -41,7 +41,6 @@ class ProjectService extends BaseService
             'project_acquired',
             'start_date',
             'end_date',
-            'turnover_date',
             'created_at',
         ]);
     }
@@ -127,7 +126,7 @@ class ProjectService extends BaseService
             }
 
             $paymentDetail = $project->paymentDetail()->updateOrCreate(['project_id' => $project->id], $paymentDetailData);
-            
+
             $paymentDetail->paymentSchedules()->forceDelete();
 
             if ($paymentDetailData['payment_type'] === PaymentType::INSTALLMENT() && isset($paymentDetailData['number_installments'])) {

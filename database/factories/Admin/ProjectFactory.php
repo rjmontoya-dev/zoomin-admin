@@ -35,10 +35,8 @@ class ProjectFactory extends Factory
             'project_detail' => $this->faker->paragraph(),
             'start_date' => $this->faker->date(),
             'end_date' => $this->faker->date(),
-            'turnover_date' => $this->faker->date(),
-            'handover_authority' => $this->faker->name(),
-            'tech_warranty' => '1 year',
-            'hardware_warranty' => '1 year',
+            'tech_warranty' => $this->faker->date(),
+            'hardware_warranty' => $this->faker->date(),
             'expenses' => $this->faker->randomFloat(2, 5000, 50000),
             'user_id' => User::factory(),
         ];
