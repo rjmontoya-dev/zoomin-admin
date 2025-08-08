@@ -2,5 +2,6 @@
 
 return [
     'Super Admin',
-    'Admin'
+    'Sales Admin',
+    'Technician'
 ];

@@ -20,6 +20,7 @@ class RegisteredUserController extends Controller
      */
     public function create(): Response
     {
+        abort(404);
         return Inertia::render('auth/Register');
     }
 

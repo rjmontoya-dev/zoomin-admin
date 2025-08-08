@@ -72,16 +72,16 @@ const navGroups = [
 ];
 
 const footerNavItems: NavItem[] = [
-    {
-        title: 'Github Repo',
-        href: 'https://github.com/rjmontoya-dev/template-v0.1',
-        icon: Folder,
-    },
-    {
-        title: 'Documentation',
-        href: '/docs/',
-        icon: BookOpen,
-    }
+    // {
+    //     title: 'Github Repo',
+    //     href: 'https://github.com/rjmontoya-dev/template-v0.1',
+    //     icon: Folder,
+    // },
+    // {
+    //     title: 'Documentation',
+    //     href: '/docs/',
+    //     icon: BookOpen,
+    // }
 ];
 </script>
 
