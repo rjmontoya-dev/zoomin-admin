@@ -180,24 +180,7 @@ const paymentScheduleErrors = computed(() => {
         </div>
         <div class="space-y-2">
           <Label for="project_acquired">Project Acquired</Label>
-          <Popover>
-            <PopoverTrigger as-child>
-              <Button
-                :variant="'outline'"
-                :class="cn('w-full justify-start text-left font-normal', !form.project_acquired && 'text-muted-foreground')"
-              >
-                <CalendarIcon class="mr-2 h-4 w-4" />
-                {{ form.project_acquired ? formatDate(form.project_acquired).date : 'Pick a date' }}
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent class="w-auto p-0">
-              <Calendar
-                :model-value="form.project_acquired ? parseDate(form.project_acquired) : undefined"
-                @update:model-value="v => form.project_acquired = v ? v.toString() : null"
-              />
-            </PopoverContent>
-          </Popover>
-          <p v-if="form.errors.project_acquired" class="text-sm text-red-500 mt-1 italic">{{ form.errors.project_acquired }}</p>
+          <Input id="project_acquired" v-model="form.project_acquired" type="text" :error="form.errors.project_acquired" />
         </div>
         <div class="space-y-2">
           <Label for="start_date">Start Date</Label>

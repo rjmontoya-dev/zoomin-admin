@@ -12,7 +12,7 @@ use Inertia\Inertia;
 class ScheduleController extends Controller
 {
     public function index()
-    { 
+    {
         return Inertia::render('admin/schedules/Index');
     }
 
@@ -22,13 +22,13 @@ class ScheduleController extends Controller
        ->select('id', 'status', 'client_name as title', 'start_date as start', 'end_date as end', 'user_id', 'project_code')->get()->map(function ($project) {
            return [
                 'id' => $project->id,
-                'status' => $project->status->pill(),
+                'status' => $project->status?->pill() ?? null,
                 'title' => $project->title ?? 'N/A',
-                'start' => $project->start,
-                'end' => $project->end,
+                'start' => $project->start ?? null,
+                'end' => $project->end ?? null,
                 'type' => 'project',
-                'user' => $project->user->name,
-                'project_code' => $project->project_code,
+                'user' => $project->user?->name ??  null,
+                'project_code' => $project->project_code ?? null,
             ];
         });
 
@@ -40,13 +40,13 @@ class ScheduleController extends Controller
         ->map(function ($repair) {
             return [
                 'id' => $repair->project_id,
-                'status' => $repair->status->pill(),
+                'status' => $repair->status?->pill() ?? null,
                 'title' => $repair->project->client_name ?? 'N/A',
-                'start' => $repair->start,
-                'end' => $repair->end,
+                'start' => $repair->start ?? null,
+                'end' => $repair->end ?? null,
                 'type' => 'repair',
-                'user' => $repair->project->user->name,
-                'project_code' => $repair->project->project_code,
+                'user' => $repair->project->user?->name ?? null,
+                'project_code' => $repair->project?->project_code ?? null,
             ];
         });
 

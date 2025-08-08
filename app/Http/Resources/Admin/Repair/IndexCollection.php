@@ -24,6 +24,7 @@ class IndexCollection extends JsonResource
             'amount' => $this->amount,
             'date_finished' => $this->date_finished,
             'created_at' => $this->created_at->format('Y-m-d H:i:s'),
+            'agent' => $this->user->name ?? null,
         ];
     }
 }

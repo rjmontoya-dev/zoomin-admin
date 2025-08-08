@@ -42,7 +42,6 @@ class Project extends BaseModel
     protected $casts = [
         'status' => ProjectStatus::class,
         'business_type' => BusinessType::class,
-        'project_acquired' => 'date',
         'start_date' => 'date',
         'end_date' => 'date',
         'tech_warranty' => 'date',

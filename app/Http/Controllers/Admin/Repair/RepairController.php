@@ -11,6 +11,7 @@ use App\Http\Resources\Admin\Repair\IndexCollection;
 use App\Http\Service\Repair\RepairService;
 use App\Models\Admin\Project;
 use App\Models\Admin\Repair;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -66,16 +67,21 @@ class RepairController extends BaseController
 
     public function create(Request $request, Project $project): Response
     {
-        
+        $users =  User::all()->map(fn($item) => [
+            'id' => $item->id,
+            'label' => $item->name,
+        ]);
+
         return Inertia::render($this->getViewPath() . '/Create', [
             'project' => $project,
             'status' => RepairStatus::getOptionList(),
+            'users' => $users,
         ]);
     }
 
     public function store(RepairStoreRequest $request, Project $project): RedirectResponse
-    { 
-        try { 
+    {
+        try {
 
             DB::transaction(fn () => $this->service->repairStore($request, $project));
 
@@ -94,11 +100,15 @@ class RepairController extends BaseController
     public function edit(Request $request, Project $project, Repair $repair): Response
     {
         $data = $this->service->edit($repair);
-
+        $users =  User::all()->map(fn($item) => [
+            'id' => $item->id,
+            'label' => $item->name,
+        ]);
         return Inertia::render($this->getViewPath() . '/Edit', [
             'project' => $project,
             'item' => $data['item'],
             'status' => RepairStatus::getOptionList(),
+             'users' => $users,
         ]);
     }
 

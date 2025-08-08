@@ -13,21 +13,17 @@ class IndexCollection extends JsonResource
      * @return array<int|string, mixed>
      */
     public function toArray(Request $request): array
-    {;
+    {
         return [
             'id' => $this->id,
-            'agent' => $this->user->name ?? null,
             'project_code' => $this->project_code,
             'client_name' => $this->client_name,
             'amount' => $this->amount,
             'status' => $this->status->pill(),
             'contact_person' => $this->contact_person ?? null,
-            'complete_address' => $this->completeAddress ?? null, 
-            'contact_number' => $this->contact_number ?? null,  
-            'business_type' => $this->business_type->pill(),
-            'project_acquired' => $this->project_acquired,
+            'contact_number' => $this->contact_number ?? null,
             'start_date' => $this->start_date,
-            'end_date' => $this->end_date, 
+            'payment_status' => $this->paymentDetail?->status->pill(),
             'created_at' => $this->created_at->format('Y-m-d H:i:s'),
         ];
     }

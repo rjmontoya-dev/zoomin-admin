@@ -10,7 +10,7 @@ return [
             'description' => 'Allow the admin to view roles',
             'guard_name' => 'web',
             'category_module' => 'Accounts',
-            'roles' => ['Super Admin', 'Admin'],
+            'roles' => ['Super Admin'],
         ],
         [
             'label' => 'Can view permission per role',
@@ -18,7 +18,7 @@ return [
             'description' => 'Allow the admin to view permission per role',
             'guard_name' => 'web',
             'category_module' => 'Accounts',
-            'roles' => ['Super Admin', 'Admin'],
+            'roles' => ['Super Admin'],
         ],
         [
             'label' => 'Can view the members per role',
@@ -26,7 +26,7 @@ return [
             'description' => 'Allow the admin to view members per role',
             'guard_name' => 'web',
             'category_module' => 'Accounts',
-            'roles' => ['Super Admin', 'Admin'],
+            'roles' => ['Super Admin'],
         ],
     ],
 
@@ -37,7 +37,7 @@ return [
             'description' => 'Allow the admin to create articles',
             'guard_name' => 'web',
             'category_module' => 'Articles',
-            'roles' => ['Super Admin', 'Admin'],
+            'roles' => ['Super Admin'],
         ],
         [
             'label' => 'Can view articles',
@@ -45,7 +45,7 @@ return [
             'description' => 'Allow the admin to view articles',
             'guard_name' => 'web',
             'category_module' => 'Articles',
-            'roles' => ['Super Admin', 'Admin'],
+            'roles' => ['Super Admin'],
         ],
         [
             'label' => 'Can update articles',
@@ -53,7 +53,7 @@ return [
             'description' => 'Allow the admin to update articles',
             'guard_name' => 'web',
             'category_module' => 'Articles',
-            'roles' => ['Super Admin', 'Admin'],
+            'roles' => ['Super Admin'],
         ],
         [
             'label' => 'Can archive articles',
@@ -61,7 +61,7 @@ return [
             'description' => 'Allow the admin to archive articles',
             'guard_name' => 'web',
             'category_module' => 'Articles',
-            'roles' => ['Super Admin', 'Admin'],
+            'roles' => ['Super Admin'],
         ],
         [
             'label' => 'Can restore articles',
@@ -69,7 +69,7 @@ return [
             'description' => 'Allow the admin to restore archived articles',
             'guard_name' => 'web',
             'category_module' => 'Articles',
-            'roles' => ['Super Admin', 'Admin'],
+            'roles' => ['Super Admin'],
         ],
     ],
 
@@ -80,7 +80,7 @@ return [
             'description' => 'Allow the admin to create users',
             'guard_name' => 'web',
             'category_module' => 'Users',
-            'roles' => ['Super Admin', 'Admin'],
+            'roles' => ['Super Admin'],
         ],
         [
             'label' => 'Can view users',
@@ -88,7 +88,7 @@ return [
             'description' => 'Allow the admin to view users',
             'guard_name' => 'web',
             'category_module' => 'Users',
-            'roles' => ['Super Admin', 'Admin'],
+            'roles' => ['Super Admin'],
         ],
         [
             'label' => 'Can update users',
@@ -96,7 +96,7 @@ return [
             'description' => 'Allow the admin to update users',
             'guard_name' => 'web',
             'category_module' => 'Users',
-            'roles' => ['Super Admin', 'Admin'],
+            'roles' => ['Super Admin'],
         ],
         [
             'label' => 'Can archive users',
@@ -104,7 +104,7 @@ return [
             'description' => 'Allow the admin to archive users',
             'guard_name' => 'web',
             'category_module' => 'Users',
-            'roles' => ['Super Admin', 'Admin'],
+            'roles' => ['Super Admin'],
         ],
         [
             'label' => 'Can restore users',
@@ -112,7 +112,7 @@ return [
             'description' => 'Allow the admin to restore archived users',
             'guard_name' => 'web',
             'category_module' => 'Users',
-            'roles' => ['Super Admin', 'Admin'],
+            'roles' => ['Super Admin'],
         ],
     ],
 
@@ -123,7 +123,7 @@ return [
             'description' => 'Allow the admin to view CMS content',
             'guard_name' => 'web',
             'category_module' => 'CMS',
-            'roles' => ['Super Admin', 'Admin'],
+            'roles' => ['Super Admin', 'Sales Admin'],
         ],
         [
             'label' => 'Can update CMS content',
@@ -131,7 +131,7 @@ return [
             'description' => 'Allow the admin to update CMS content',
             'guard_name' => 'web',
             'category_module' => 'CMS',
-            'roles' => ['Super Admin', 'Admin'],
+            'roles' => ['Super Admin', 'Sales Admin'],
         ],
     ],
 

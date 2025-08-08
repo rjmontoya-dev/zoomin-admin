@@ -1,6 +1,8 @@
 <?php
 
 use App\Enums\Statuses\RepairStatus;
+use App\Models\Admin\Project;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,7 +16,8 @@ return new class extends Migration
     {
         Schema::create('repairs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('project_id')->constrained('projects');
+            $table->foreignId('project_id')->constrained('projects')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('reported_issue');
             $table->date('date_reported');
             $table->string('status')->default(RepairStatus::PENDING->value);

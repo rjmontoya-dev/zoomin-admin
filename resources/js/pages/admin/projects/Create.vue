@@ -48,7 +48,7 @@ const form = useForm({
   tech_warranty: '',
   hardware_warranty: '',
   expenses: null,
-  project_detail: '', 
+  project_detail: '',
   user_id: '',
   payment_details: {
     total_amount: null,
@@ -65,10 +65,6 @@ const form = useForm({
 
 const isLoading = ref(false)
 const convertDate = () => { 
-    if (form.project_acquired) {
-        form.project_acquired = new Date(form.project_acquired).toLocaleDateString('en-CA');
-    }
-
     if (form.start_date) {
         form.start_date = new Date(form.start_date).toLocaleDateString('en-CA');
     }

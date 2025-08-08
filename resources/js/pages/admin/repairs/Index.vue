@@ -25,6 +25,8 @@ interface Repair {
     repair_date: string;
     amount: number;
     date_finished: string;
+    user_id: string;
+    agent: string;
 }
 
 interface Project {
@@ -85,15 +87,16 @@ const indexRoute = ref(route('admin.projects.repairs.index', { project: props.pr
 const counts = computed(() => props.tabCounts);
 
 const TABS = computed(() => [
-  { label: 'All', value: 'all', tabCount: counts.value.all },
-  { label: 'Pending', value: 'pending', tabCount: counts.value.all },
-  { label: 'On Going', value: 'on-going', tabCount: counts.value.all },
-  { label: 'Done', value: 'done', tabCount: counts.value.all },
+  { label: 'All', value: 'all', tabCount: null },
+  { label: 'Pending', value: 'pending', tabCount: null },
+  { label: 'On Going', value: 'on_going', tabCount: null },
+  { label: 'Done', value: 'done', tabCount: null },
   { label: 'Archived', value: 'archived', tabCount: counts.value.archived },
 ]);
 
 const COLUMNS = [
     { key: 'reported_issue', label: 'Reported Issue' },
+    { key: 'agent', label: 'Agent' },
     { key: 'date_reported', label: 'Date Reported' },
     { key: 'status', label: 'Status' },
     { key: 'remarks', label: 'Remarks' },

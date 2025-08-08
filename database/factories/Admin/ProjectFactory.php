@@ -38,7 +38,7 @@ class ProjectFactory extends Factory
             'tech_warranty' => $this->faker->date(),
             'hardware_warranty' => $this->faker->date(),
             'expenses' => $this->faker->randomFloat(2, 5000, 50000),
-            'user_id' => User::factory(),
+            'user_id' => 1,
         ];
     }
 }

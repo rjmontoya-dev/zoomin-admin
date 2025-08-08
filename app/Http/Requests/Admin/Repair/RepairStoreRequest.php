@@ -26,6 +26,7 @@ class RepairStoreRequest extends FormRequest
             'date_reported' => ['required', 'date'],
             'status' => ['required', 'numeric'],
             'remarks' => ['nullable', 'string'],
+            'user_id' => ['required', 'exists:users,id'],
             'repair_date' => ['nullable', 'date', 'after_or_equal:date_reported'],
             'amount' => ['nullable', 'numeric'],
             'date_finished' => ['nullable', 'date', 'after_or_equal:repair_date'],

@@ -6,9 +6,17 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Input } from '@/components/ui/input';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { debounce } from 'lodash';
-import { CalendarDays, Filter, Logs, Search, SortAsc, SortDesc } from 'lucide-vue-next';
-import { computed, defineEmits, defineProps, reactive, ref, watch } from 'vue';
+import { CalendarDays, Filter, Logs, Search, SortAsc, SortDesc , CalendarIcon} from 'lucide-vue-next';
+import { computed, defineEmits, defineProps, reactive, ref, watch, type Ref } from 'vue';
 import { router } from '@inertiajs/vue3';
+import {
+  CalendarDate,
+  DateFormatter,
+  getLocalTimeZone,
+} from "@internationalized/date"
+import { RangeCalendar } from "@/components/ui/range-calendar"
+import { cn } from "@/lib/utils"
+import type { DateRange } from "reka-ui"
 
 import BaseDataTable from './BaseDataTable.vue';
 import BasePaginator from './BasePaginator.vue';
@@ -72,7 +80,7 @@ const items = computed(() => props.data);
 
 // Active filters state
 const activeFilters = reactive({
-    dateRange: null,
+    dateRange: null as { start: string | null; end: string | null } | null,
     ...(props.filters || {}),
 });
 
@@ -115,6 +123,11 @@ const currentSortLabel = computed(() => {
     return sorters?.value.find((s: Sorter) => s.value === activeSort.value.value)?.label || 'Sort';
 });
 
+const dateRange = ref<DateRange>({
+  start: undefined,
+  end: undefined,
+})
+
 // --- GENERAL METHODS (moved from implementation) ---
 
 const handlePageUpdate = (page: number) => {
@@ -133,6 +146,8 @@ const handleSortUpdate = (sort: { value: string; direction: 'asc' | 'desc' }) =>
 };
 
 const handleResetFilters = () => {
+    dateRange.value.start = null;
+    dateRange.value.end = null;
     activeFilters.dateRange = null;
     selectedDate.value = null;
     if (props.filters) {
@@ -159,21 +174,26 @@ const handleSortBy = (value: string) => {
     handleSortUpdate(activeSort.value);
 };
 
-// Date formatting utility
-const formatDate = (date: any) => {
-    if (!date) return '';
-    if (date.start && date.end) {
-        return `${date.start.toLocaleDateString()} - ${date.end.toLocaleDateString()}`;
-    }
-    return date.toLocaleDateString();
-};
-
-const setSelectedDate = (date: any) => {
-    selectedDate.value = date;
-};
-
 const applyFilters = () => {
-    activeFilters.dateRange = selectedDate.value;
+    // Handle date range conversion to YYYY-MM-DD format
+    if (dateRange.value?.start || dateRange.value?.end) {
+        const formatDateToString = (date: any) => {
+            if (!date) return null;
+            // Convert CalendarDate to YYYY-MM-DD format
+            const year = date.year;
+            const month = String(date.month).padStart(2, '0');
+            const day = String(date.day).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        };
+
+        activeFilters.dateRange = {
+            start: formatDateToString(dateRange.value.start),
+            end: formatDateToString(dateRange.value.end)
+        };
+    } else {
+        activeFilters.dateRange = null;
+    }
+
     queryOptions.page = 1;
     isFilterDrawerOpen.value = false;
 };
@@ -215,6 +235,12 @@ watch(
   }, 300),
   { deep: true }
 );
+
+const df = new DateFormatter("en-US", {
+  dateStyle: "medium",
+})
+
+
 </script>
 
 <template>
@@ -264,27 +290,33 @@ watch(
                             <div class="flex-1 space-y-6 p-6">
                                 <!-- Date Range Filter -->
                                 <div class="space-y-2">
-                                    <label class="text-sm font-medium text-gray-900 dark:text-white">Date Range</label>
+                                    <label class="text-sm font-medium text-gray-900 dark:text-white">Date Created</label>
                                     <Popover>
                                         <PopoverTrigger as-child>
-                                            <Button variant="outline" class="w-full justify-start text-left font-normal">
-                                                <span v-if="selectedDate">
-                                                    {{ formatDate(selectedDate) }}
-                                                </span>
-                                                <span v-else class="text-muted-foreground">Pick a date</span>
-                                                <CalendarDays class="ml-auto h-4 w-4 opacity-50" />
-                                            </Button>
-                                        </PopoverTrigger>
+                                        <Button
+                                            variant="outline"
+                                            :class="cn(
+                                            'w-[280px] justify-start text-left font-normal',
+                                            !dateRange && 'text-muted-foreground',
+                                            )"
+                                        >
+                                            <CalendarIcon class="mr-2 h-4 w-4" />
+                                            <template v-if="dateRange.start">
+                                            <template v-if="dateRange.end">
+                                                {{ df.format(dateRange.start.toDate(getLocalTimeZone())) }} - {{ df.format(dateRange.end.toDate(getLocalTimeZone())) }}
+                                            </template>
 
-                                        <PopoverContent class="w-auto p-0" align="start">
-                                            <Calendar
-                                                initialFocus
-                                                mode="range"
-                                                :selected="selectedDate"
-                                                @select="setSelectedDate"
-                                                :defaultMonth="selectedDate || new Date()"
-                                                :numberOfMonths="2"
-                                            />
+                                            <template v-else>
+                                                {{ df.format(dateRange.start.toDate(getLocalTimeZone())) }}
+                                            </template>
+                                            </template>
+                                            <template v-else>
+                                            Pick a date
+                                            </template>
+                                        </Button>
+                                        </PopoverTrigger>
+                                        <PopoverContent class="w-auto p-0">
+                                        <RangeCalendar v-model="dateRange" initial-focus :number-of-months="2" @update:start-value="(startDate) => dateRange.start = startDate" />
                                         </PopoverContent>
                                     </Popover>
                                 </div>

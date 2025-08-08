@@ -39,7 +39,7 @@ class ProjectStoreRequest extends FormRequest
             'business_type' => ['required', new Enum(BusinessType::class)],
             'contact_number' => ['nullable', 'string'],
             'fb_name' => ['nullable', 'string'],
-            'project_acquired' => ['nullable', 'date'],
+            'project_acquired' => ['nullable', 'string'],
             'start_date' => ['nullable', 'date'],
             'end_at' => ['nullable', 'date', 'after_or_equal:start_at'],
             'tech_warranty' => ['nullable', 'date'],
