@@ -21,7 +21,7 @@ class BaseService
     protected array $filters = [];
     protected array $sorters = [];
     protected array $tabFilters = [];
-    protected int $defaultPerPage = 5;
+    protected int $defaultPerPage = 10;
     protected int $maxPerPage = 100;
     protected string $defaultSort = 'created_at';
     protected string $defaultSortDirection = 'desc';

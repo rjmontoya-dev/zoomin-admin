@@ -25,6 +25,7 @@ interface Project {
 const props = defineProps({
     project: Object as () => Project,
     status: Object,
+    users: Object,
 });
 
 const breadcrumbs = [
@@ -57,6 +58,7 @@ const cancel = () => {
 const form = useForm({
     reported_issue: null,
     date_reported: null,
+    user_id: null,
     status: null,
     remarks: null,
     repair_date: null,
@@ -90,7 +92,7 @@ const submit = () => {
             <div class="flex-1 overflow-y-auto p-6">
                 <div class="flex justify-center">
                     <div class="w-full max-w-2xl rounded border bg-white p-6 shadow">
-                        <FormSection :form="form" :statuses="status" />
+                        <FormSection :form="form" :statuses="status" :users="users" />
 
                         <!-- Sticky button container -->
                         <div class="sticky bottom-0 mt-6 flex justify-end space-x-3 border-t bg-white p-4">

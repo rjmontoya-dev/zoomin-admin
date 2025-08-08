@@ -2,6 +2,7 @@
 
 namespace App\Http\Service\Repair;
 
+use App\Enums\Statuses\RepairStatus;
 use App\Http\Service\Base\BaseService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -14,6 +15,13 @@ class RepairService extends BaseService
      */
     protected function initialize(): void
     {
+        $this->setTabFilters([
+            'done' => fn (Builder $query) => $query->where('status', RepairStatus::DONE()),
+            'on_going' => fn (Builder $query) => $query->where('status', RepairStatus::ONGOING()),
+            'pending' => fn (Builder $query) => $query->where('status', RepairStatus::PENDING()),
+            'archived' => fn (Builder $query) => $query->onlyTrashed(),
+        ]);
+
         $this->setSearchableFields([
             'reported_issue',
             'remarks',
@@ -46,7 +54,7 @@ class RepairService extends BaseService
     }
     public function repairStore(Request $request, Model $model)
     {
-        $data = $request->validated(); 
+        $data = $request->validated();
         $model->repairs()->create($data);
         return $model;
     }

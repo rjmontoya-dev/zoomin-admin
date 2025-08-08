@@ -15,7 +15,7 @@ class EditResource extends JsonResource
     public function toArray(Request $request): array
     {
       return array_merge(
-    ['role_id' => $this->roles[0]?->id],
+    ['role_id' => $this->roles[0]?->id ?? null],
              parent::toArray($request)
         );
     }

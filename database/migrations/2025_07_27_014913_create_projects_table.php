@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('business_type')->default(BusinessType::PUBLIC->value);
             $table->string('contact_number')->nullable();
             $table->string('fb_name')->nullable();
-            $table->date('project_acquired')->nullable();
+            $table->string('project_acquired')->nullable();
             $table->text('project_detail')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();

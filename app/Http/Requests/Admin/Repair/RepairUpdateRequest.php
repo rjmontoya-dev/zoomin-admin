@@ -25,6 +25,7 @@ class RepairUpdateRequest extends FormRequest
             'reported_issue' => ['required', 'string', 'max:255'],
             'date_reported' => ['required', 'date'],
             'status' => ['required', 'numeric'],
+            'user_id' => ['required', 'exists:users,id'],
             'remarks' => ['nullable', 'string'],
             'repair_date' => ['nullable', 'date', 'after_or_equal:date_reported'],
             'amount' => ['nullable', 'numeric'],

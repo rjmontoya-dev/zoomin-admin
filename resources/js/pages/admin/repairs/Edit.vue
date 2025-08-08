@@ -24,6 +24,7 @@ interface Project {
 
 interface Repair {
     id: number;
+    user_id: string,
     reported_issue: string;
     date_reported: string;
     status: any;
@@ -36,6 +37,7 @@ interface Repair {
 const props = defineProps({
   project: Object as () => Project,
   status: Object,
+  users: Object,
   item: {
     type: Object as () => Repair,
     required: true,
@@ -45,6 +47,7 @@ const props = defineProps({
 const form = useForm({
     id: null,
     reported_issue: null,
+    user_id: null,
     date_reported: null,
     status: null,
     remarks: null,
@@ -93,6 +96,7 @@ watch(
         form.repair_date = newData.repair_date ?? null
         form.amount = newData.amount ?? null
         form.date_finished = newData.date_finished ?? null
+        form.user_id = newData.user_id ?? null
     }
   },
   { immediate: true }
@@ -125,7 +129,7 @@ const submit = () => {
             <div class="flex-1 overflow-y-auto p-6">
                 <div class="flex justify-center">
                     <div class="w-full max-w-2xl rounded border bg-white p-6 shadow">
-                        <FormSection :form="form" :statuses="status" />
+                        <FormSection :form="form" :statuses="status" :users="users" />
 
                         <!-- Sticky button container -->
                         <div class="sticky bottom-0 mt-6 flex justify-end space-x-3 border-t bg-white p-4">

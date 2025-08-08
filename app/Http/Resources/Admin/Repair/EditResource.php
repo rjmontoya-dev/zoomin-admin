@@ -23,6 +23,8 @@ class EditResource extends JsonResource
             'repair_date' => $this->repair_date,
             'amount' => $this->amount,
             'date_finished' => $this->date_finished,
+            'user_id' => $this->user_id,
+            'agent' => $this->user->name ?? null,
         ];
     }
 }

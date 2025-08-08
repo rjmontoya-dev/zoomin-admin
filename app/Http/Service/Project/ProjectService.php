@@ -8,6 +8,7 @@ use App\Enums\Statuses\ProjectStatus;
 use App\Enums\Types\PaymentType;
 use App\Http\Service\Base\BaseService;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,6 +17,15 @@ class ProjectService extends BaseService
 {
     public function initialize(): void
     {
+       $this->setTabFilters([
+            'cancelled' => fn (Builder $query) => $query->where('status', ProjectStatus::CANCELED()),
+            'completed' => fn (Builder $query) => $query->where('status', ProjectStatus::COMPLETED()),
+            'in_progress' => fn (Builder $query) => $query->where('status', ProjectStatus::IN_PROGRESS()),
+            'waiting_schedule' => fn (Builder $query) => $query->where('status', ProjectStatus::WAITING_SCHEDULE()),
+            'with_repair' => fn (Builder $query) => $query->where('status', ProjectStatus::WITH_REPAIR()),
+            'archived' => fn (Builder $query) => $query->onlyTrashed(),
+        ]);
+
         $this->setSearchableFields([
             'project_code',
             'client_name',
@@ -24,6 +34,7 @@ class ProjectService extends BaseService
             'town',
             'barangay',
             'fb_name',
+            'contact_number',
         ]);
 
         $this->setFilters([
@@ -32,17 +43,12 @@ class ProjectService extends BaseService
         ]);
 
         $this->setSorters([
-            'id',
-            'project_code',
             'client_name',
             'amount',
-            'status',
-            'business_type',
-            'project_acquired',
             'start_date',
-            'end_date',
             'created_at',
         ]);
+
     }
 
     /**

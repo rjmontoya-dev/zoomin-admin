@@ -12,6 +12,8 @@ import 'vue-sonner/style.css'
 import LoadingPage from '@/components/shared/LoadingPage.vue'
 import BaseTable from '@/components/base/BaseTable.vue'
 import { Badge } from '@/components/ui/badge';
+import { useDateFormat } from '@/composables/useDateFormat';
+
 
 interface Status {
     label: string;
@@ -32,6 +34,7 @@ const page = usePage()
 const activeTab = ref<string>(page.props.tab as string || 'all')
 const isLoading = ref<boolean>(false)
 
+const { formatDate } = useDateFormat();
 const breadcrumbs = [
     {
         title: 'Projects',
@@ -42,12 +45,14 @@ const breadcrumbs = [
 const COLUMNS = [
     { key: 'project_code', label: 'Code' },
     { key: 'client_name', label: 'Client' },
-    { key: 'agent', label: 'Agent' },
+    // { key: 'agent', label: 'Agent' },
     { key: 'amount', label: 'Amount' },
     { key: 'status', label: 'Status' },
     { key: 'contact_number', label: 'Contact #' },
+    { key: 'contact_person', label: 'Contact P.' },
     { key: 'start_date', label: 'Start Date' },
-    { key: 'created_at', label: 'Date Created' },
+    { key: 'payment_status', label: 'Payment Status' },
+    // { key: 'created_at', label: 'Date Created' },
     { key: 'actions', label: 'Actions' },
 ]
 
@@ -57,18 +62,21 @@ watch(() => (page.props as any).flash.success, (newValue: string) => {
   }
 })
 
-const TABS = computed(() => {
-  const tabs = [{ label: 'All', value: 'all', tabCount: props.tabCounts.all }]
-  props.additionalProps.status.forEach((status: Status) => {
-    tabs.push({
-      label: status.label,
-      value: status.id,
-      tabCount: props.tabCounts[status.value] || 0,
-    })
-  })
-  tabs.push({ label: 'Archived', value: 'archived', tabCount: props.tabCounts.archived })
-  return tabs
-})
+const TABS = computed(() => [
+  { label: 'All', value: 'all', tabCount: props.tabCounts.all },
+  { label: 'Cancelled', value: 'cancelled', tabCount: props.tabCounts.cancelled },
+  { label: 'Completed', value: 'completed', tabCount: props.tabCounts.completed },
+  { label: 'In Progress', value: 'in_progress', tabCount: props.tabCounts.in_progress },
+  { label: 'Waiting Schedule', value: 'waiting_schedule', tabCount: props.tabCounts.waiting_schedule },
+  { label: 'With Repair', value: 'with_repair', tabCount: props.tabCounts.with_repair },
+  { label: 'Archived', value: 'archived', tabCount: props.tabCounts.archived },
+]);
+
+const SORTERS = computed(() => [
+    { label: 'Amount', value: 'amount' },
+    { label: 'Start Date', value: 'start_date' },
+    { label: 'Client', value: 'client_name' },
+]);
 
 const create = () => {
   isLoading.value = true
@@ -122,6 +130,7 @@ const restore = (id: number) => {
             :columns="COLUMNS"
             :meta="meta"
             :tabs="TABS"
+            :sorters="SORTERS"
             :filters="filters"
             :route="route('admin.projects.index')"
             :active-tab="activeTab"
@@ -129,12 +138,23 @@ const restore = (id: number) => {
             <template #cell-agent="{ item }">
                 {{ item.agent }}
             </template>
+            <template #cell-start_date="{ item }">
+                {{ formatDate(item.start_date).date }}
+            </template>
             <template #cell-status="{ item }">
                 <Badge
                     :class="`border-${item.status.color}-500 bg-${item.status.color}-50 text-${item.status.color}-700`"
                     variant="outline"
                     >
                     {{ item.status.title }}
+                </Badge>
+            </template>
+             <template #cell-payment_status="{ item }">
+                <Badge
+                    :class="`border-${item.payment_status?.color}-500 bg-${item.payment_status?.color}-50 text-${item.payment_status?.color}-700`"
+                    variant="outline"
+                    >
+                    {{ item.payment_status?.title }}
                 </Badge>
             </template>
             <template #cell-business_type="{ item }">

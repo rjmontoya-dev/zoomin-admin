@@ -18,6 +18,7 @@ defineProps({
         required: true
     },
     statuses: Object,
+    users: Object,
 })
 
 const { formatDate } = useDateFormat()
@@ -70,7 +71,20 @@ const { formatDate } = useDateFormat()
                 </Select>
                 <p v-if="form.errors['status']" class="text-sm text-red-500 mt-1 italic">{{ form.errors['status'] }}</p>
             </div>
-
+            <div class="space-y-2 pb-4">
+            <Label for="status">Assigned Agent</Label>
+            <Select v-model="form.user_id" class="w-full">
+                <SelectTrigger  class="w-full">
+                <SelectValue placeholder="Select Agent" />
+                </SelectTrigger>
+                <SelectContent>
+                <SelectItem v-for="(agent, index) in users" :key="index" :value="agent.id">
+                    {{ agent.label }}
+                </SelectItem>
+                </SelectContent>
+            </Select>
+            <p v-if="form.errors.user_id" class="text-sm text-red-500 mt-1 italic">{{ form.errors.user_id }}</p>
+            </div>
             <div class="space-y-2 pb-4">
                 <label class="block text-sm font-medium text-gray-900 dark:text-white">Remarks</label>
                 <Textarea
