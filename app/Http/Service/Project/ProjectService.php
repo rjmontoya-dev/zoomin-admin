@@ -118,15 +118,14 @@ class ProjectService extends BaseService
                 'total_amount' => $data['payment_details']['total_amount'],
                 'date_payment' => $data['payment_details']['date_payment'],
                 'number_installments' => $data['payment_details']['number_installments'] ?? null,
-                'remarks' => $data['payment_details']['remarks']
+                'remarks' => $data['payment_details']['remarks'],
+                'status' => $data['payment_details']['status'],
             ];
 
             if ($paymentDetailData['payment_type'] === PaymentType::FULL->value) {
-                $paymentDetailData['status'] = PaymentStatus::PAID->value;
                 $paymentDetailData['balance'] = 0;
                 $paymentDetailData['amount_paid'] = $data['amount'];
             } else {
-                $paymentDetailData['status'] = PaymentStatus::UNPAID->value;
                 $paymentDetailData['balance'] = $data['amount'];
                 $paymentDetailData['amount_paid'] = 0;
             }

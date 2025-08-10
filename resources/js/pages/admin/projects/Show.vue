@@ -126,7 +126,7 @@ const updateStatus = (status: number) => {
                         </div>
                         <div class="space-y-1">
                             <p class="text-sm font-medium text-gray-500">Project Acquired</p>
-                            <p class="text-gray-900">{{ formatDate(project.project_acquired).formatted }}</p>
+                            <p class="text-gray-900">{{ project.project_acquired }}</p>
                         </div>
                         <div class="space-y-1">
                             <p class="text-sm font-medium text-gray-500">Start Date</p>

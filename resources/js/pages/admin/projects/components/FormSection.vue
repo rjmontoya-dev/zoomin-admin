@@ -15,7 +15,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Calendar } from '@/components/ui/calendar'
+import { Calendar, EnhancedCalendar } from '@/components/ui/calendar'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { cn } from '@/lib/utils'
 import { useDateFormat } from '@/composables/useDateFormat'
@@ -182,26 +182,26 @@ const paymentScheduleErrors = computed(() => {
           <Label for="project_acquired">Project Acquired</Label>
           <Input id="project_acquired" v-model="form.project_acquired" type="text" :error="form.errors.project_acquired" />
         </div>
-        <div class="space-y-2">
-          <Label for="start_date">Start Date</Label>
-          <Popover>
+       <div class="space-y-2">
+        <Label for="start_date">Start Date</Label>
+        <Popover>
             <PopoverTrigger as-child>
-              <Button
+            <Button
                 :variant="'outline'"
                 :class="cn('w-full justify-start text-left font-normal', !form.start_date && 'text-muted-foreground')"
-              >
+            >
                 <CalendarIcon class="mr-2 h-4 w-4" />
                 {{ form.start_date ? formatDate(form.start_date).date : 'Pick a date' }}
-              </Button>
+            </Button>
             </PopoverTrigger>
             <PopoverContent class="w-auto p-0">
-              <Calendar
+            <EnhancedCalendar
                 :model-value="form.start_date ? parseDate(form.start_date) : undefined"
                 @update:model-value="v => form.start_date = v ? v.toString() : null"
-              />
+            />
             </PopoverContent>
-          </Popover>
-          <p v-if="form.errors.start_date" class="text-sm text-red-500 mt-1 italic">{{ form.errors.start_date }}</p>
+        </Popover>
+        <p v-if="form.errors.start_date" class="text-sm text-red-500 mt-1 italic">{{ form.errors.start_date }}</p>
         </div>
         <div class="space-y-2">
           <Label for="end_date">End Date</Label>
@@ -216,10 +216,10 @@ const paymentScheduleErrors = computed(() => {
               </Button>
             </PopoverTrigger>
             <PopoverContent class="w-auto p-0">
-              <Calendar
-                :model-value="form.end_date ? parseDate(form.end_date) : undefined"
-                @update:model-value="v => form.end_date = v ? v.toString() : null"
-              />
+                <EnhancedCalendar
+                    :model-value="form.end_date ? parseDate(form.end_date) : undefined"
+                    @update:model-value="v => form.end_date = v ? v.toString() : null"
+                />
             </PopoverContent>
           </Popover>
           <p v-if="form.errors.end_date" class="text-sm text-red-500 mt-1 italic">{{ form.errors.end_date }}</p>
@@ -237,7 +237,7 @@ const paymentScheduleErrors = computed(() => {
               </Button>
             </PopoverTrigger>
             <PopoverContent class="w-auto p-0">
-              <Calendar
+              <EnhancedCalendar
                 :model-value="form.tech_warranty ? parseDate(form.tech_warranty) : undefined"
                 @update:model-value="v => form.tech_warranty = v ? v.toString() : null"
               />
@@ -258,7 +258,7 @@ const paymentScheduleErrors = computed(() => {
               </Button>
             </PopoverTrigger>
             <PopoverContent class="w-auto p-0">
-              <Calendar
+              <EnhancedCalendar
                 :model-value="form.hardware_warranty ? parseDate(form.hardware_warranty) : undefined"
                 @update:model-value="v => form.hardware_warranty = v ? v.toString() : null"
               />
@@ -341,7 +341,7 @@ const paymentScheduleErrors = computed(() => {
               </Button>
             </PopoverTrigger>
             <PopoverContent class="w-auto p-0">
-              <Calendar
+              <EnhancedCalendar
                 :model-value="form.payment_details.date_payment ? parseDate(form.payment_details.date_payment) : undefined"
                 @update:model-value="v => form.payment_details.date_payment = v ? v.toString() : null"
               />
