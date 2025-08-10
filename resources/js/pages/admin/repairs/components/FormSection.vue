@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Calendar as CalendarIcon } from 'lucide-vue-next'
-import { Calendar } from '@/components/ui/calendar'
+import { Calendar, EnhancedCalendar } from '@/components/ui/calendar'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 
 defineProps({
@@ -49,7 +49,7 @@ const { formatDate } = useDateFormat()
                     </Button>
                     </PopoverTrigger>
                     <PopoverContent class="w-auto p-0">
-                    <Calendar
+                    <EnhancedCalendar
                         :model-value="form.date_reported ? parseDate(form.date_reported) : undefined"
                         @update:model-value="v => form.date_reported = v ? v.toString() : null"
                     />
@@ -108,7 +108,7 @@ const { formatDate } = useDateFormat()
                     </Button>
                     </PopoverTrigger>
                     <PopoverContent class="w-auto p-0">
-                    <Calendar
+                    <EnhancedCalendar
                         :model-value="form.repair_date ? parseDate(form.repair_date) : undefined"
                         @update:model-value="v => form.repair_date = v ? v.toString() : null"
                     />
@@ -135,7 +135,7 @@ const { formatDate } = useDateFormat()
                     </Button>
                     </PopoverTrigger>
                     <PopoverContent class="w-auto p-0">
-                    <Calendar
+                    <EnhancedCalendar
                         :model-value="form.date_finished ? parseDate(form.date_finished) : undefined"
                         @update:model-value="v => form.date_finished = v ? v.toString() : null"
                     />

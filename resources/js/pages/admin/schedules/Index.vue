@@ -28,7 +28,6 @@ const calendarOptions = ref<CalendarOptions>({
           <div class="px-1 py-0.5 rounded ${titleBgClass}">${title}</div>
           <ul class="list-disc marker:${textColorClass} marker:text-xl list-inside mt-1 ${textColorClass}">
             <li>${status.title}</li>
-            <li>${user}</li>
           </ul>
         </div>
       `

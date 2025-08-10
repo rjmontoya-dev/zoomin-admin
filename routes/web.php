@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\Repair\RepairController;
 use App\Http\Controllers\Admin\RolePermission\RolePermissionController;
 use App\Http\Controllers\Admin\User\UserController;
 use App\Http\Controllers\Admin\ScheduleController;
+use App\Http\Controllers\Api\WebsiteVisitController;
 use App\Http\Controllers\CmsPage\PagesController;
 use App\Http\Controllers\Settings\TwoFactorAuthController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,16 @@ Route::prefix('admin')
     ->name('admin.')
     ->middleware(['auth'])
     ->group(function () {
+
+        Route::prefix('dashboard')
+        ->name('dashboard.')
+        ->middleware(['auth'])
+        ->group(function () {
+
+            Route::get('/visits', [WebsiteVisitController::class, 'getStats'])->name('visits.stats');
+        });
+
+
 
         Route::prefix('cms')
             ->name('cms.')

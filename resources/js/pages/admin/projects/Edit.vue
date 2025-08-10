@@ -86,7 +86,7 @@ watch(
       form.business_type = newProject.business_type
       form.contact_number = newProject.contact_number
       form.fb_name = newProject.fb_name
-      form.project_acquired = formatDate(newProject.project_acquired)
+      form.project_acquired = newProject.project_acquired
       form.start_date = formatDate(newProject.start_date)
       form.end_date = formatDate(newProject.end_date)
       form.tech_warranty = formatDate(newProject.tech_warranty)
