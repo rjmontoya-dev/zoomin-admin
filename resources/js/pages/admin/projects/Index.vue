@@ -52,6 +52,7 @@ const COLUMNS = [
     { key: 'contact_person', label: 'Contact P.' },
     { key: 'start_date', label: 'Start Date' },
     { key: 'payment_status', label: 'Payment Status' },
+    { key: 'payment_type', label: 'Payment Type' },
     // { key: 'created_at', label: 'Date Created' },
     { key: 'actions', label: 'Actions' },
 ]
@@ -157,8 +158,13 @@ const restore = (id: number) => {
                     {{ item.payment_status?.title }}
                 </Badge>
             </template>
-            <template #cell-business_type="{ item }">
-                {{ item.business_type.title }}
+            <template #cell-payment_type="{ item }">
+                <Badge
+                    :class="`border-${item.payment_type?.color}-500 bg-${item.payment_type?.color}-50 text-${item.payment_type?.color}-700`"
+                    variant="outline"
+                    >
+                    {{ item.payment_type?.title }}
+                </Badge>
             </template>
             <template #cell-actions="{ item }">
                 <DropdownMenu>

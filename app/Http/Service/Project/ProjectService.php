@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\DB;
 
 class ProjectService extends BaseService
 {
+    protected string $defaultSort = 'start_date';
+
     public function initialize(): void
     {
        $this->setTabFilters([
@@ -105,11 +107,11 @@ class ProjectService extends BaseService
         $data = $request->validated();
 
         return DB::transaction(function () use ( $data, $project) {
-            if($data['start_date']){
-                $data['status'] = ProjectStatus::IN_PROGRESS();
-            }else{
-                $data['status'] = ProjectStatus::WAITING_SCHEDULE();
-            }
+            // if($data['start_date']){
+            //     $data['status'] = ProjectStatus::IN_PROGRESS();
+            // }else{
+            //     $data['status'] = ProjectStatus::WAITING_SCHEDULE();
+            // }
             $project->update($data);
 
             $paymentDetailData = [
