@@ -24,6 +24,7 @@ class IndexCollection extends JsonResource
             'contact_number' => $this->contact_number ?? null,
             'start_date' => $this->start_date,
             'payment_status' => $this->paymentDetail?->status->pill(),
+            'payment_type' => $this->paymentDetail?->payment_type?->pill() ?? null,
             'created_at' => $this->created_at->format('Y-m-d H:i:s'),
         ];
     }

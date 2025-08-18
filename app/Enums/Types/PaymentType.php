@@ -22,11 +22,13 @@ enum PaymentType: int
             [
                 'value' => self::FULL,
                 'title' => 'Full',
+                'color' => 'green'
             ],
             [
                 'value' => self::INSTALLMENT,
                 'title' => 'Installment',
-            ], 
+                'color' => 'yellow'
+            ],
         ];
     }
 }
